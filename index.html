@@ -42,7 +42,7 @@
         </div>
     </div>
 
-    <!-- Main Website Content -->
+    <!-- Main Website Content (Hidden initially until passcode verified) -->
     <div id="mainSiteContent" class="hidden flex-grow flex flex-col justify-between">
         <!-- Header / Navbar -->
         <header class="sticky top-0 z-40 bg-slate-900/80 backdrop-blur-md border-b border-slate-800">
@@ -121,14 +121,14 @@
                 </div>
 
                 <div>
-                    <label class="block text-xs font-medium text-slate-400 mb-1">ဖိုင်များ ရွေးချယ်ရန် (ပုံအများကြီး ရွေးလို့ရပါသည်)</label>
+                    <label class="block text-xs font-medium text-slate-400 mb-1">ဖိုင်များ ရွေးချယ်ရန် (ပုံအများကြီး Select လုပ်လို့ရပါသည်)</label>
                     <input type="file" id="uploadFiles" name="uploadFiles" multiple accept="image/*,video/*" required class="w-full text-xs text-slate-400 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-rose-600 file:text-white hover:file:bg-rose-500 cursor-pointer">
                 </div>
 
                 <!-- Progress Bar Area -->
                 <div id="progressContainer" class="hidden space-y-1">
                     <div class="flex justify-between text-xs text-slate-400">
-                        <span id="progressText">Processing...</span>
+                        <span id="progressText">Uploading...</span>
                         <span id="progressPercent">0%</span>
                     </div>
                     <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
@@ -167,19 +167,40 @@
         </button>
     </div>
 
+    <!-- IndexedDB & App Core Logic -->
     <script>
-        let mediaList = JSON.parse(localStorage.getItem('vault_media')) || [];
+        let db;
+        let mediaList = [];
         let currentMediaIndex = 0;
 
+        // Initialize IndexedDB Database
+        function initDB() {
+            return new Promise((resolve, reject) => {
+                const request = indexedDB.open("MemoriesVaultDB", 1);
+                request.onupgradeneeded = (e) => {
+                    const database = e.target.result;
+                    if (!database.objectStoreNames.contains("memories")) {
+                        database.createObjectStore("memories", { keyPath: "id", autoIncrement: true });
+                    }
+                };
+                request.onsuccess = (e) => {
+                    db = e.target.result;
+                    resolve(db);
+                };
+                request.onerror = (e) => reject(e);
+            });
+        }
+
         // Verify Initial Passcode
-        window.verifySitePasscode = (e) => {
+        window.verifySitePasscode = async (e) => {
             e.preventDefault();
             const input = document.getElementById('sitePasscode').value;
             if (input === "1234") {
                 document.getElementById('fullAuthOverlay').classList.add('hidden');
                 document.getElementById('mainSiteContent').classList.remove('hidden');
                 document.getElementById('mainSiteContent').classList.add('flex');
-                renderGallery();
+                await initDB();
+                await fetchGallery();
             } else {
                 alert("Admin Password မှားယွင်းနေပါသည်!");
             }
@@ -189,7 +210,22 @@
         window.openUploadModal = () => document.getElementById('uploadModal').classList.remove('hidden');
         window.closeUploadModal = () => document.getElementById('uploadModal').classList.add('hidden');
 
-        // Render Gallery
+        // Fetch & Render Gallery Data
+        async function fetchGallery() {
+            if (!db) await initDB();
+            return new Promise((resolve) => {
+                const transaction = db.transaction(["memories"], "readonly");
+                const store = transaction.objectStore("memories");
+                const getAll = store.getAll();
+
+                getAll.onsuccess = () => {
+                    mediaList = getAll.result.reverse();
+                    renderGallery();
+                    resolve();
+                };
+            });
+        }
+
         function renderGallery() {
             const galleryGrid = document.getElementById('galleryGrid');
             galleryGrid.innerHTML = '';
@@ -223,15 +259,26 @@
             });
         }
 
-        // Convert File to Base64 (Reliable Local Storage Display)
+        // Convert File to Base64
         const fileToBase64 = (file) => new Promise((resolve, reject) => {
             const reader = new FileReader();
             reader.readAsDataURL(file);
             reader.onload = () => resolve(reader.result);
-            reader.onerror = (error) => reject(error);
+            reader.onerror = (err) => reject(err);
         });
 
-        // Handle Bulk Upload
+        // Add Record to IndexedDB
+        function saveToDB(item) {
+            return new Promise((resolve, reject) => {
+                const transaction = db.transaction(["memories"], "readwrite");
+                const store = transaction.objectStore("memories");
+                const request = store.add(item);
+                request.onsuccess = () => resolve();
+                request.onerror = (e) => reject(e);
+            });
+        }
+
+        // Bulk Upload Handler
         window.handleBulkUpload = async (e) => {
             e.preventDefault();
 
@@ -258,19 +305,19 @@
                 progressText.innerText = `Processing ${i + 1}/${files.length}...`;
 
                 try {
-                    const base64Url = await fileToBase64(file);
+                    const base64Data = await fileToBase64(file);
                     const mediaItem = {
-                        url: base64Url,
+                        url: base64Data,
                         caption: caption || file.name,
                         type: type,
                         date: date,
                         timestamp: Date.now()
                     };
 
-                    mediaList.unshift(mediaItem);
+                    await saveToDB(mediaItem);
                     successCount++;
                 } catch (err) {
-                    console.error("File Read Error:", err);
+                    console.error("Upload Error:", err);
                 }
 
                 const percent = Math.round(((i + 1) / files.length) * 100);
@@ -278,15 +325,12 @@
                 progressPercent.innerText = `${percent}%`;
             }
 
-            // Save to Local Storage
-            localStorage.setItem('vault_media', JSON.stringify(mediaList));
-
             alert(`${successCount} ဖိုင် အောင်မြင်စွာ တင်ပြီးပါပြီ!`);
             submitBtn.disabled = false;
             progressContainer.classList.add('hidden');
             document.getElementById('uploadForm').reset();
             closeUploadModal();
-            renderGallery();
+            await fetchGallery();
         };
 
         // Lightbox Operations
