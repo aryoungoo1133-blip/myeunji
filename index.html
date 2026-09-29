@@ -168,14 +168,12 @@
     </div>
 
     <script>
-        // ImgBB Working Free Client Key
         const IMGBB_KEY = "3b3f272a0889f0a9965fb6efec21ef5e";
         const SERVER_STORAGE_KEY = "online_vault_media_v1";
 
         let mediaList = [];
         let currentMediaIndex = 0;
 
-        // Sync with Cloud Server Storage
         async function loadServerGallery() {
             try {
                 const res = await fetch(`https://api.jsonbin.io/v3/b/66fa1a80acd3cb34a88dc65b/latest`, {
@@ -261,7 +259,6 @@
             });
         }
 
-        // Upload Direct to Cloud Server
         window.handleBulkUpload = async (e) => {
             e.preventDefault();
 
