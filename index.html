@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Couple Memories Vault & Gallery</title>
-  
+ 
   <!-- WEBSITE TAB FAVICON -->
   <link rel="icon" type="image/jpeg" href="favicon.jpg">
 
@@ -25,7 +25,7 @@
         Couple Memories
       </h2>
       <p class="text-xs text-slate-400 mb-6">Website သို့ ဝင်ရောက်ရန် Admin Email & Password ရိုက်ထည့်ပါ</p>
-      
+     
       <form id="adminLoginForm" class="space-y-4">
         <input type="email" id="mainAdminEmail" placeholder="Admin Email" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-rose-500 transition">
         <input type="password" id="mainAdminPassword" placeholder="Admin Password" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-rose-500 transition">
@@ -118,7 +118,7 @@
   <!-- FULLSCREEN SLIDER VIEWER MODAL -->
   <div id="viewModal" class="fixed inset-0 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 hidden z-50 select-none">
     <button id="closeViewModalBtn" class="absolute top-5 right-5 text-white/70 hover:text-white text-3xl font-bold bg-slate-800/60 hover:bg-slate-800 w-10 h-10 rounded-full flex items-center justify-center transition z-10">&times;</button>
-    
+   
     <button id="prevBtn" class="absolute left-4 top-1/2 -translate-y-1/2 bg-slate-800/80 hover:bg-rose-500 text-white p-3.5 rounded-full transition duration-200 z-10 focus:outline-none shadow-lg hover:scale-110">
       &#10094;
     </button>
@@ -137,7 +137,7 @@
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, setPersistence, inMemoryPersistence } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
     import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc, query } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
     // Cloudinary Configs
@@ -158,6 +158,11 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
+
+    // Login Data ကို Memory ထဲမှာပဲ ခဏသိမ်းစေရန် (Browser Storage ထဲ မသိမ်းစေရန်) သတ်မှတ်ခြင်း
+    setPersistence(auth, inMemoryPersistence).catch((error) => {
+      console.error("Persistence Error:", error);
+    });
 
     const loginPage = document.getElementById("loginPage");
     const mainApp = document.getElementById("mainApp");
@@ -188,9 +193,21 @@
 
     let memoryList = [];
     let currentIndex = 0;
+    let isInitialLoad = true;
 
     // Authentication State စစ်ဆေးခြင်း
-    onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, async (user) => {
+      // Page ဖွင့်ဖွင့်ချင်း ရှေ့က ဝင်ထားခဲ့တဲ့ Cache session ရှိနေပါက အတင်း Sign Out လုပ်ပေးမည်
+      if (isInitialLoad && user) {
+        isInitialLoad = false;
+        await signOut(auth);
+        mainApp.classList.add("hidden");
+        loginPage.classList.remove("hidden");
+        return;
+      }
+      
+      isInitialLoad = false;
+
       if (user) {
         loginPage.classList.add("hidden");
         mainApp.classList.remove("hidden");
@@ -346,7 +363,7 @@
       formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
 
       const resourceType = file.type.startsWith('video/') ? 'video' : 'image';
-      
+     
       return new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest();
         xhr.open("POST", `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/${resourceType}/upload`);
@@ -356,7 +373,7 @@
             const percent = Math.round((e.loaded / e.total) * 100);
             progressBar.style.width = `${percent}%`;
             progressPercent.innerText = `${percent}%`;
-            
+           
             if (percent === 100) {
               progressText.innerText = "Processing video on server... (ခဏစောင့်ပါ)";
             }
@@ -421,7 +438,7 @@
       if (count > 0) {
         alert(`${count} ဖိုင် အောင်မြင်စွာ တင်ပြီးပါပြီ!`);
       }
-      
+     
       progressContainer.classList.add("hidden");
       submitBtn.disabled = false;
       uploadForm.reset();
