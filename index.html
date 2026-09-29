@@ -35,7 +35,14 @@
             </div>
             
             <div class="flex items-center space-x-3">
-                <button onclick="openUploadModal()" class="px-4 py-1.5 text-xs sm:text-sm bg-rose-600 hover:bg-rose-500 text-white rounded-lg shadow-lg shadow-rose-600/30 font-medium transition-all duration-200 flex items-center space-x-2">
+                <!-- Admin Login / Logout Button -->
+                <button id="adminAuthBtn" onclick="handleAdminAuthClick()" class="px-3 py-1.5 text-xs sm:text-sm bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 rounded-lg transition-all duration-200 flex items-center space-x-2">
+                    <i class="fa-solid fa-lock"></i>
+                    <span id="adminAuthBtnText">Admin Login</span>
+                </button>
+
+                <!-- Upload Button (Hidden until Admin Login) -->
+                <button id="uploadTriggerBtn" onclick="openUploadModal()" class="hidden px-4 py-1.5 text-xs sm:text-sm bg-rose-600 hover:bg-rose-500 text-white rounded-lg shadow-lg shadow-rose-600/30 font-medium transition-all duration-200 items-center space-x-2">
                     <i class="fa-solid fa-plus"></i>
                     <span>Upload</span>
                 </button>
@@ -70,6 +77,29 @@
         <p>© 2026 Couple Memories Vault & Gallery. All Rights Reserved.</p>
     </footer>
 
+    <!-- Admin Login Modal -->
+    <div id="loginModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 w-full max-w-sm shadow-2xl relative">
+            <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <h3 class="text-xl font-bold text-slate-100 mb-4 flex items-center space-x-2">
+                <i class="fa-solid fa-user-shield text-rose-500"></i>
+                <span>Admin Login</span>
+            </h3>
+
+            <form onsubmit="submitAdminLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-medium text-slate-400 mb-1">PASSWORD</label>
+                    <input type="password" id="loginPasswordInput" placeholder="****" required class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-rose-500">
+                </div>
+                <button type="submit" class="w-full py-2.5 bg-rose-600 hover:bg-rose-500 text-white rounded-lg font-medium text-sm transition-all duration-200">
+                    Login ဝင်မည်
+                </button>
+            </form>
+        </div>
+    </div>
+
     <!-- Bulk Upload Modal -->
     <div id="uploadModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
         <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 w-full max-w-md shadow-2xl relative">
@@ -102,13 +132,7 @@
                 </div>
 
                 <div>
-                    <label class="block text-xs font-medium text-slate-400 mb-1">PASSWORD (ADMIN)</label>
-                    <input type="password" id="adminPassword" placeholder="****" required class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-rose-500">
-                </div>
-
-                <div>
                     <label class="block text-xs font-medium text-slate-400 mb-1">ဖိုင်များ ရွေးချယ်ရန် (ပုံအများကြီး Select လုပ်လို့ရပါသည်)</label>
-                    <!-- MULTIPLE KEYWORD IS INCLUDED HERE -->
                     <input type="file" id="uploadFiles" name="uploadFiles" multiple accept="image/*,video/*" required class="w-full text-xs text-slate-400 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-rose-600 file:text-white hover:file:bg-rose-500 cursor-pointer">
                 </div>
 
@@ -132,20 +156,16 @@
 
     <!-- Lightbox Media Viewer Modal -->
     <div id="lightboxModal" class="fixed inset-0 z-50 bg-black/95 flex items-center justify-center hidden select-none">
-        <!-- Close Button -->
         <button onclick="closeLightbox()" class="absolute top-5 right-5 text-slate-400 hover:text-white z-50 text-2xl">
             <i class="fa-solid fa-xmark"></i>
         </button>
 
-        <!-- Previous Button -->
         <button onclick="navigateLightbox(-1)" class="absolute left-4 top-1/2 -translate-y-1/2 bg-slate-900/60 hover:bg-slate-800 text-white p-3 rounded-full z-50 transition-all">
             <i class="fa-solid fa-chevron-left text-lg"></i>
         </button>
 
-        <!-- Media Display Area -->
         <div class="max-w-4xl max-h-[85vh] p-2 flex flex-col items-center justify-center">
             <div id="lightboxMediaContainer" class="flex items-center justify-center max-h-[75vh]">
-                <!-- Dynamic Image/Video Inserted Here -->
             </div>
             <div class="mt-3 text-center">
                 <p id="lightboxCaption" class="text-slate-200 font-medium text-sm sm:text-base"></p>
@@ -153,7 +173,6 @@
             </div>
         </div>
 
-        <!-- Next Button -->
         <button onclick="navigateLightbox(1)" class="absolute right-4 top-1/2 -translate-y-1/2 bg-slate-900/60 hover:bg-slate-800 text-white p-3 rounded-full z-50 transition-all">
             <i class="fa-solid fa-chevron-right text-lg"></i>
         </button>
@@ -182,6 +201,40 @@
 
         let mediaList = [];
         let currentMediaIndex = 0;
+        let isAdminLoggedIn = false;
+
+        // Admin Auth Functions
+        window.handleAdminAuthClick = () => {
+            if (isAdminLoggedIn) {
+                isAdminLoggedIn = false;
+                document.getElementById('adminAuthBtnText').innerText = "Admin Login";
+                document.getElementById('uploadTriggerBtn').classList.add('hidden');
+                document.getElementById('uploadTriggerBtn').classList.remove('flex');
+                alert("Admin Logout ထွက်လိုက်ပါပြီ!");
+            } else {
+                document.getElementById('loginModal').classList.remove('hidden');
+            }
+        };
+
+        window.closeLoginModal = () => {
+            document.getElementById('loginModal').classList.add('hidden');
+        };
+
+        window.submitAdminLogin = (e) => {
+            e.preventDefault();
+            const password = document.getElementById('loginPasswordInput').value;
+            if (password === "1234") {
+                isAdminLoggedIn = true;
+                document.getElementById('adminAuthBtnText').innerText = "Logout";
+                document.getElementById('uploadTriggerBtn').classList.remove('hidden');
+                document.getElementById('uploadTriggerBtn').classList.add('flex');
+                closeLoginModal();
+                document.getElementById('loginPasswordInput').value = '';
+                alert("Admin Login အောင်မြင်ပါသည်!");
+            } else {
+                alert("Password မှားယွင်းနေပါသည်!");
+            }
+        };
 
         // Modal Controls
         window.openUploadModal = () => document.getElementById('uploadModal').classList.remove('hidden');
@@ -247,9 +300,8 @@
         window.handleBulkUpload = async (e) => {
             e.preventDefault();
             
-            const password = document.getElementById('adminPassword').value;
-            if (password !== "1234") {
-                alert("Admin Password မှားယွင်းနေပါသည်!");
+            if (!isAdminLoggedIn) {
+                alert("Admin Login အရင်ဝင်ပေးပါ!");
                 return;
             }
 
@@ -355,7 +407,7 @@
             date.innerText = item.date || '';
         }
 
-        // Keyboard Navigation (Arrow Keys)
+        // Keyboard Navigation
         document.addEventListener('keydown', (e) => {
             const lightbox = document.getElementById('lightboxModal');
             if (!lightbox.classList.contains('hidden')) {
