@@ -1,449 +1,2077 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Couple Memories Vault & Gallery</title>
- 
-  <!-- WEBSITE TAB FAVICON -->
-  <link rel="icon" type="image/jpeg" href="favicon.jpg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Eunji N SXYY FOTOSS</title>
 
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: { extend: { colors: { brand: { 500: '#f43f5e', 600: '#e11d48' } } } }
-    }
-  </script>
+    <link rel="icon" type="image/jpeg" href="favicon.jpg">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        rose: {
+                            50: '#fff1f2',
+                            100: '#ffe4e6',
+                            200: '#fecdd3',
+                            300: '#fda4af',
+                            400: '#fb7185',
+                            500: '#f43f5e',
+                            600: '#e11d48',
+                            700: '#be123c',
+                            800: '#9f1239',
+                            900: '#881337'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at 15% 10%, rgba(244,63,94,.13), transparent 28%),
+                radial-gradient(circle at 85% 15%, rgba(168,85,247,.11), transparent 30%),
+                radial-gradient(circle at 50% 100%, rgba(59,130,246,.06), transparent 35%),
+                #020617;
+            color: #f8fafc;
+            font-family:
+                Inter,
+                ui-sans-serif,
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: .035;
+            background-image:
+                linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px);
+            background-size: 40px 40px;
+            mask-image: linear-gradient(to bottom, black, transparent);
+        }
+
+        ::selection {
+            background: rgba(244,63,94,.35);
+            color: white;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #020617;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(#f43f5e, #a855f7);
+            border-radius: 999px;
+        }
+
+        .glass {
+            background: rgba(15,23,42,.68);
+            border: 1px solid rgba(255,255,255,.08);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+
+        .glass-strong {
+            background: rgba(2,6,23,.84);
+            border: 1px solid rgba(255,255,255,.09);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+        }
+
+        .brand-text {
+            background: linear-gradient(
+                90deg,
+                #fb7185,
+                #f43f5e,
+                #c084fc,
+                #fb7185
+            );
+            background-size: 300% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradientMove 5s linear infinite;
+        }
+
+        @keyframes gradientMove {
+            0% {
+                background-position: 0% center;
+            }
+
+            100% {
+                background-position: 300% center;
+            }
+        }
+
+        .glow {
+            box-shadow:
+                0 0 30px rgba(244,63,94,.10),
+                0 20px 70px rgba(0,0,0,.35);
+        }
+
+        .btn-gradient {
+            background: linear-gradient(
+                135deg,
+                #f43f5e,
+                #e11d48,
+                #9333ea
+            );
+            background-size: 200% 200%;
+            transition:
+                transform .25s ease,
+                box-shadow .25s ease,
+                background-position .35s ease;
+        }
+
+        .btn-gradient:hover {
+            transform: translateY(-2px);
+            background-position: 100% 0;
+            box-shadow:
+                0 10px 35px rgba(244,63,94,.28),
+                0 0 25px rgba(168,85,247,.15);
+        }
+
+        .btn-gradient:active {
+            transform: translateY(0) scale(.98);
+        }
+
+        .memory-card {
+            overflow: hidden;
+            border-radius: 22px;
+            background: rgba(15,23,42,.72);
+            border: 1px solid rgba(255,255,255,.07);
+            box-shadow: 0 15px 50px rgba(0,0,0,.28);
+            transition:
+                transform .35s ease,
+                border-color .35s ease,
+                box-shadow .35s ease;
+        }
+
+        .memory-card:hover {
+            transform: translateY(-7px);
+            border-color: rgba(244,63,94,.30);
+            box-shadow:
+                0 25px 70px rgba(0,0,0,.42),
+                0 0 30px rgba(244,63,94,.08);
+        }
+
+        .memory-media {
+            transition:
+                transform .55s cubic-bezier(.2,.8,.2,1);
+        }
+
+        .memory-card:hover .memory-media {
+            transform: scale(1.045);
+        }
+
+        .modal-backdrop {
+            animation: fadeIn .22s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal-box {
+            animation: modalUp .28s cubic-bezier(.2,.8,.2,1) forwards;
+        }
+
+        @keyframes modalUp {
+            from {
+                opacity: 0;
+                transform: translateY(18px) scale(.97);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .login-card {
+            animation: loginAppear .6s cubic-bezier(.2,.8,.2,1);
+        }
+
+        @keyframes loginAppear {
+            from {
+                opacity: 0;
+                transform: translateY(25px) scale(.96);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .input-style {
+            width: 100%;
+            border-radius: 14px;
+            border: 1px solid rgba(255,255,255,.08);
+            background: rgba(15,23,42,.75);
+            color: white;
+            padding: 13px 15px;
+            outline: none;
+            transition:
+                border-color .25s ease,
+                box-shadow .25s ease,
+                background .25s ease;
+        }
+
+        .input-style::placeholder {
+            color: #64748b;
+        }
+
+        .input-style:focus {
+            border-color: rgba(244,63,94,.65);
+            background: rgba(15,23,42,.95);
+            box-shadow: 0 0 0 4px rgba(244,63,94,.08);
+        }
+
+        .empty-state {
+            border: 1px dashed rgba(255,255,255,.10);
+            background: rgba(15,23,42,.38);
+        }
+
+        .heart-pulse {
+            animation: heartPulse 1.8s ease-in-out infinite;
+        }
+
+        @keyframes heartPulse {
+            0%,100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.12);
+            }
+        }
+    </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen antialiased selection:bg-rose-500 selection:text-white">
 
-  <!-- ADMIN LOGIN SCREEN -->
-  <div id="loginPage" class="fixed inset-0 bg-slate-950 flex items-center justify-center p-4 z-50">
-    <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-sm w-full p-8 shadow-2xl text-center">
-      <h2 class="text-2xl font-bold bg-gradient-to-r from-rose-500 to-pink-500 bg-clip-text text-transparent mb-2">
-        Couple Memories
-      </h2>
-      <p class="text-xs text-slate-400 mb-6">Website သို့ ဝင်ရောက်ရန် Admin Email & Password ရိုက်ထည့်ပါ</p>
-     
-      <form id="adminLoginForm" class="space-y-4">
-        <input type="email" id="mainAdminEmail" placeholder="Admin Email" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-rose-500 transition">
-        <input type="password" id="mainAdminPassword" placeholder="Admin Password" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-rose-500 transition">
-        <button type="submit" id="loginSubmitBtn" class="w-full bg-rose-500 hover:bg-rose-600 text-white font-semibold py-3 rounded-xl text-sm transition shadow-lg shadow-rose-500/25">
-          Login ဝင်မည်
-        </button>
-      </form>
+<body>
+
+<!-- =========================================================
+     ADMIN LOGIN
+========================================================= -->
+
+<div
+    id="loginPage"
+    class="min-h-screen flex items-center justify-center px-5 py-10">
+
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute -top-32 -left-32 w-96 h-96 bg-rose-500/10 rounded-full blur-3xl"></div>
+        <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
     </div>
-  </div>
 
-  <!-- MAIN APP CONTENT -->
-  <div id="mainApp" class="hidden">
-    <!-- Header Section -->
-    <header class="border-b border-slate-800 bg-slate-900/50 backdrop-blur sticky top-0 z-40">
-      <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-        <h1 class="text-xl font-bold bg-gradient-to-r from-rose-500 to-pink-500 bg-clip-text text-transparent">
-          Couple Memories
-        </h1>
-        <div class="flex items-center gap-3">
-          <button id="openUploadModalBtn" class="bg-rose-500 hover:bg-rose-600 text-white font-medium px-4 py-2 rounded-xl text-sm transition shadow-lg shadow-rose-500/20 active:scale-95">
-            + အမှတ်တရသစ်တင်ရန်
-          </button>
-          <button id="logoutBtn" class="bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium px-3 py-2 rounded-xl text-xs transition">
-            Logout
-          </button>
+    <div
+        class="login-card glass-strong glow w-full max-w-md rounded-3xl p-7 sm:p-9 relative">
+
+        <div class="text-center mb-8">
+
+            <div
+                class="heart-pulse inline-flex items-center justify-center
+                       w-16 h-16 rounded-2xl
+                       bg-gradient-to-br from-rose-500/20 to-purple-500/20
+                       border border-rose-400/20 mb-5">
+
+                <span class="text-3xl">❤️</span>
+
+            </div>
+
+            <h1 class="text-3xl sm:text-4xl font-black tracking-tight brand-text">
+                My Eunji N SXYY FOTOSS
+            </h1>
+
+            <p class="text-slate-400 mt-3 text-sm">
+                Private Memory Vault
+            </p>
+
         </div>
-      </div>
+
+
+        <form id="adminLoginForm" class="space-y-5">
+
+            <div>
+
+                <label class="block text-sm font-medium text-slate-300 mb-2">
+                    Email Address
+                </label>
+
+                <input
+                    id="email"
+                    type="email"
+                    required
+                    autocomplete="email"
+                    class="input-style"
+                    placeholder="Enter your email">
+
+            </div>
+
+
+            <div>
+
+                <label class="block text-sm font-medium text-slate-300 mb-2">
+                    Password
+                </label>
+
+                <input
+                    id="password"
+                    type="password"
+                    required
+                    autocomplete="current-password"
+                    class="input-style"
+                    placeholder="Enter your password">
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="btn-gradient w-full py-3.5 rounded-xl font-bold text-white">
+
+                Sign In
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     MAIN APP
+========================================================= -->
+
+<div id="mainApp" class="hidden min-h-screen">
+
+    <header class="sticky top-0 z-40 glass-strong border-b border-white/5">
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4">
+
+            <div class="flex items-center justify-between gap-4">
+
+                <div class="min-w-0">
+
+                    <h1 class="brand-text text-xl sm:text-2xl font-black truncate">
+                        My Eunji N SXYY FOTOSS
+                    </h1>
+
+                    <p class="text-xs text-slate-500 mt-0.5">
+                        Private Memory Vault
+                    </p>
+
+                </div>
+
+
+                <div class="flex items-center gap-2">
+
+                    <button
+                        id="openUploadModalBtn"
+                        class="btn-gradient flex items-center gap-2
+                               px-4 py-2.5 rounded-xl
+                               text-sm font-bold text-white
+                               whitespace-nowrap">
+
+                        <span class="text-lg leading-none">+</span>
+
+                        <span class="hidden sm:inline">
+                            Upload Memory
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        id="logoutBtn"
+                        class="px-4 py-2.5 rounded-xl
+                               text-sm font-semibold
+                               bg-slate-800/80 hover:bg-slate-700
+                               border border-white/5
+                               text-slate-300 hover:text-white
+                               transition">
+
+                        Logout
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
     </header>
 
-    <!-- Gallery Grid Container -->
-    <main class="max-w-6xl mx-auto px-4 py-8">
-      <div id="mediaContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Firestore Data -->
-      </div>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+
+        <div
+            id="mediaContainer"
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+        </div>
+
     </main>
-  </div>
 
-  <!-- Upload Modal -->
-  <div id="uploadModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 hidden z-50">
-    <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-6 shadow-2xl relative max-h-[85vh] overflow-y-auto">
-      <div class="flex justify-between items-center mb-6 sticky top-0 bg-slate-900 z-10 pb-2 border-b border-slate-800">
-        <h3 class="text-lg font-bold text-white">အမှတ်တရဓာတ်ပုံ/ဗီဒီယို တင်ရန်</h3>
-        <button id="closeUploadModalBtn" class="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800 transition">&times;</button>
-      </div>
+</div>
 
-      <form id="uploadForm" class="space-y-4">
-        <div>
-          <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">ခေါင်းစဉ် / CAPTION</label>
-          <input type="text" id="uploadTitle" placeholder="My Eunji <3" class="w-full bg-slate-800/80 border border-slate-700/80 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-rose-500 transition">
-        </div>
 
-        <div class="grid grid-cols-2 gap-4">
-          <div>
-            <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">အမျိုးအစား</label>
-            <select id="uploadType" class="w-full bg-slate-800/80 border border-slate-700/80 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-rose-500 transition">
-              <option value="Photo">Photo (ပုံ)</option>
-              <option value="Video">Video (ဗီဒီယို)</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">ရက်စွဲ (OPTIONAL)</label>
-            <input type="date" id="uploadDate" class="w-full bg-slate-800/80 border border-slate-700/80 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-rose-500 transition">
-          </div>
-        </div>
+<!-- =========================================================
+     UPLOAD MODAL
+========================================================= -->
 
-        <div>
-          <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">ဖိုင်များရွေးချယ်ရန် (ပုံ/ဗီဒီယို Select လုပ်ပါ)</label>
-          <input type="file" id="uploadFile" multiple accept="image/*,video/*" required class="w-full text-xs text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-rose-500 file:text-white hover:file:bg-rose-600 transition cursor-pointer">
-        </div>
+<div
+    id="uploadModal"
+    class="hidden fixed inset-0 z-50 modal-backdrop
+           bg-black/75 backdrop-blur-md
+           flex items-center justify-center p-4">
 
-        <div id="uploadProgressContainer" class="hidden pt-2">
-          <div class="flex justify-between text-xs text-rose-400 mb-1">
-            <span id="progressText">Uploading to Cloudinary...</span>
-            <span id="progressPercent">0%</span>
-          </div>
-          <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
-            <div id="progressBar" class="bg-rose-500 h-2 rounded-full w-0 transition-all duration-300"></div>
-          </div>
-        </div>
+    <div
+        class="modal-box glass-strong glow
+               w-full max-w-lg rounded-3xl p-6 sm:p-7">
 
-        <div class="pt-2">
-          <button type="submit" id="submitBtn" class="w-full bg-rose-500 hover:bg-rose-600 text-white font-semibold py-3 rounded-xl transition shadow-lg shadow-rose-500/25 text-sm">
-            Upload တင်မည်
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
+        <div class="flex items-center justify-between mb-6">
 
-  <!-- FULLSCREEN SLIDER VIEWER MODAL -->
-  <div id="viewModal" class="fixed inset-0 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 hidden z-50 select-none">
-    <button id="closeViewModalBtn" class="absolute top-5 right-5 text-white/70 hover:text-white text-3xl font-bold bg-slate-800/60 hover:bg-slate-800 w-10 h-10 rounded-full flex items-center justify-center transition z-10">&times;</button>
-   
-    <button id="prevBtn" class="absolute left-4 top-1/2 -translate-y-1/2 bg-slate-800/80 hover:bg-rose-500 text-white p-3.5 rounded-full transition duration-200 z-10 focus:outline-none shadow-lg hover:scale-110">
-      &#10094;
-    </button>
-
-    <button id="nextBtn" class="absolute right-4 top-1/2 -translate-y-1/2 bg-slate-800/80 hover:bg-rose-500 text-white p-3.5 rounded-full transition duration-200 z-10 focus:outline-none shadow-lg hover:scale-110">
-      &#10095;
-    </button>
-
-    <div class="max-w-4xl w-full max-h-[90vh] flex flex-col items-center px-8">
-      <div id="modalMediaContent" class="w-full flex justify-center items-center max-h-[75vh] overflow-hidden rounded-2xl mb-4">
-      </div>
-      <h3 id="modalTitle" class="text-xl font-bold text-white text-center"></h3>
-      <p id="modalDate" class="text-xs text-rose-400 font-medium mt-1"></p>
-    </div>
-  </div>
-
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, setPersistence, inMemoryPersistence } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-    import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc, query } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
-    // Cloudinary Configs
-    const CLOUDINARY_CLOUD_NAME = "vneswxx4";
-    const CLOUDINARY_UPLOAD_PRESET = "myeunji";
-
-    // Firebase Real Credentials
-    const firebaseConfig = {
-      apiKey: "AIzaSyDZyW992JYkmfB9S9JskJNNyxX0wfjooBY",
-      authDomain: "sweb-24fdc.firebaseapp.com",
-      projectId: "sweb-24fdc",
-      storageBucket: "sweb-24fdc.firebasestorage.app",
-      messagingSenderId: "883021695279",
-      appId: "1:883021695279:web:e44dc36321ee3ad40539da",
-      measurementId: "G-B50ELELYBG"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
-
-    // Login Data ကို Memory ထဲမှာပဲ ခဏသိမ်းစေရန် (Browser Storage ထဲ မသိမ်းစေရန်) သတ်မှတ်ခြင်း
-    setPersistence(auth, inMemoryPersistence).catch((error) => {
-      console.error("Persistence Error:", error);
-    });
-
-    const loginPage = document.getElementById("loginPage");
-    const mainApp = document.getElementById("mainApp");
-    const adminLoginForm = document.getElementById("adminLoginForm");
-    const mainAdminEmail = document.getElementById("mainAdminEmail");
-    const mainAdminPassword = document.getElementById("mainAdminPassword");
-    const loginSubmitBtn = document.getElementById("loginSubmitBtn");
-    const logoutBtn = document.getElementById("logoutBtn");
-
-    const openUploadModalBtn = document.getElementById("openUploadModalBtn");
-    const closeUploadModalBtn = document.getElementById("closeUploadModalBtn");
-    const uploadModal = document.getElementById("uploadModal");
-    const uploadForm = document.getElementById("uploadForm");
-    const container = document.getElementById("mediaContainer");
-    const progressContainer = document.getElementById("uploadProgressContainer");
-    const progressBar = document.getElementById("progressBar");
-    const progressText = document.getElementById("progressText");
-    const progressPercent = document.getElementById("progressPercent");
-    const submitBtn = document.getElementById("submitBtn");
-
-    const viewModal = document.getElementById("viewModal");
-    const closeViewModalBtn = document.getElementById("closeViewModalBtn");
-    const modalMediaContent = document.getElementById("modalMediaContent");
-    const modalTitle = document.getElementById("modalTitle");
-    const modalDate = document.getElementById("modalDate");
-    const prevBtn = document.getElementById("prevBtn");
-    const nextBtn = document.getElementById("nextBtn");
-
-    let memoryList = [];
-    let currentIndex = 0;
-    let isInitialLoad = true;
-
-    // Authentication State စစ်ဆေးခြင်း
-    onAuthStateChanged(auth, async (user) => {
-      // Page ဖွင့်ဖွင့်ချင်း ရှေ့က ဝင်ထားခဲ့တဲ့ Cache session ရှိနေပါက အတင်း Sign Out လုပ်ပေးမည်
-      if (isInitialLoad && user) {
-        isInitialLoad = false;
-        await signOut(auth);
-        mainApp.classList.add("hidden");
-        loginPage.classList.remove("hidden");
-        return;
-      }
-      
-      isInitialLoad = false;
-
-      if (user) {
-        loginPage.classList.add("hidden");
-        mainApp.classList.remove("hidden");
-        loadMemories();
-      } else {
-        mainApp.classList.add("hidden");
-        loginPage.classList.remove("hidden");
-      }
-    });
-
-    adminLoginForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      loginSubmitBtn.disabled = true;
-      loginSubmitBtn.innerText = "စစ်ဆေးနေပါသည်...";
-
-      try {
-        await signInWithEmailAndPassword(auth, mainAdminEmail.value, mainAdminPassword.value);
-        adminLoginForm.reset();
-      } catch (error) {
-        alert("Login ဝင်ရောက်မှု မအောင်မြင်ပါ! Email သို့မဟုတ် Password မှားယွင်းနေပါသည်။");
-        console.error("Auth Error:", error);
-      } finally {
-        loginSubmitBtn.disabled = false;
-        loginSubmitBtn.innerText = "Login ဝင်မည်";
-      }
-    });
-
-    logoutBtn.addEventListener("click", () => {
-      signOut(auth);
-    });
-
-    openUploadModalBtn.addEventListener("click", () => uploadModal.classList.remove("hidden"));
-    closeUploadModalBtn.addEventListener("click", () => uploadModal.classList.add("hidden"));
-
-    closeViewModalBtn.addEventListener("click", () => viewModal.classList.add("hidden"));
-    viewModal.addEventListener("click", (e) => {
-      if (e.target === viewModal) viewModal.classList.add("hidden");
-    });
-
-    prevBtn.addEventListener("click", showPrev);
-    nextBtn.addEventListener("click", showNext);
-
-    document.addEventListener("keydown", (e) => {
-      if (!viewModal.classList.contains("hidden")) {
-        if (e.key === "ArrowLeft") showPrev();
-        if (e.key === "ArrowRight") showNext();
-        if (e.key === "Escape") viewModal.classList.add("hidden");
-      }
-    });
-
-    function showPrev() {
-      if (memoryList.length === 0) return;
-      currentIndex = (currentIndex - 1 + memoryList.length) % memoryList.length;
-      updateModalDisplay();
-    }
-
-    function showNext() {
-      if (memoryList.length === 0) return;
-      currentIndex = (currentIndex + 1) % memoryList.length;
-      updateModalDisplay();
-    }
-
-    function updateModalDisplay() {
-      const item = memoryList[currentIndex];
-      const imageUrl = item.url || item.display_url || item.imageUrl || '';
-
-      if (item.type === "Video") {
-        modalMediaContent.innerHTML = `<video src="${imageUrl}" controls autoplay class="max-h-[75vh] w-auto rounded-xl shadow-2xl"></video>`;
-      } else {
-        modalMediaContent.innerHTML = `<img src="${imageUrl}" class="max-h-[75vh] w-auto object-contain rounded-xl shadow-2xl transition duration-300">`;
-      }
-      modalTitle.innerText = item.title || "Untitled";
-      modalDate.innerText = item.date || "Special Moment";
-    }
-
-    function loadMemories() {
-      const q = query(collection(db, "couple_memories"));
-      onSnapshot(q, (snapshot) => {
-        memoryList = [];
-        if (!snapshot.empty) {
-          snapshot.forEach((docSnap) => {
-            const item = docSnap.data();
-            item.id = docSnap.id;
-            memoryList.push(item);
-          });
-        }
-        renderGallery();
-      }, (err) => {
-        console.error("Firestore read error:", err);
-      });
-    }
-
-    function renderGallery() {
-      container.innerHTML = "";
-      if (memoryList.length === 0) {
-        container.innerHTML = `<div class="col-span-full text-center py-12 text-slate-500">အမှတ်တရ ဓာတ်ပုံများ မရှိသေးပါ</div>`;
-        return;
-      }
-
-      memoryList.forEach((item, index) => {
-        const imageUrl = item.url || item.display_url || item.imageUrl || '';
-
-        const card = document.createElement("div");
-        card.className = "bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl flex flex-col group hover:border-slate-700 transition duration-300";
-        card.innerHTML = `
-          <div class="relative overflow-hidden aspect-video bg-slate-950 flex items-center justify-center cursor-pointer media-preview-click">
-            ${imageUrl ? (item.type === 'Video' ? `<video src="${imageUrl}" class="w-full h-full object-cover"></video><div class="absolute inset-0 bg-black/40 flex items-center justify-center text-3xl">▶️</div>` : `<img src="${imageUrl}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">`) : `<div class="text-xs text-slate-500">ပုံ/ဗီဒီယို မရှိပါ</div>`}
-            <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
-               <span class="text-xs bg-black/60 text-white px-3 py-1.5 rounded-full border border-white/20">🔍 ကြည့်ရန် နှိပ်ပါ</span>
-            </div>
-          </div>
-          <div class="p-5 flex-1 flex flex-col justify-between">
             <div>
-              <div class="flex items-center justify-between gap-2 mb-2">
-                <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-rose-500/10 text-rose-400 border border-rose-500/20">${item.type || 'Photo'}</span>
-                <span class="text-xs text-slate-500 font-medium">${item.date || 'Special Moment'}</span>
-              </div>
-              <h4 class="font-bold text-base text-white leading-snug cursor-pointer media-preview-click">${item.title || 'Untitled'}</h4>
+
+                <h2 class="text-xl font-bold text-white">
+                    Upload Memory
+                </h2>
+
+                <p class="text-sm text-slate-500 mt-1">
+                    Add a new photo or video
+                </p>
+
             </div>
-            <div class="pt-4 mt-4 border-t border-slate-800/80 flex justify-end">
-              <button data-del-id="${item.id}" class="delete-btn text-xs font-semibold text-red-400 hover:text-red-300 bg-red-500/10 hover:bg-red-500/20 px-3 py-1.5 rounded-lg transition">ဖျက်မည်</button>
+
+
+            <button
+                id="closeUploadModalBtn"
+                class="w-10 h-10 rounded-xl
+                       bg-slate-800/80 hover:bg-slate-700
+                       text-slate-300 hover:text-white
+                       transition text-xl">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <form id="uploadForm" class="space-y-5">
+
+            <!-- TITLE -->
+
+            <div>
+
+                <label class="block text-sm font-medium text-slate-300 mb-2">
+                    Title
+                </label>
+
+                <input
+                    id="mediaTitle"
+                    type="text"
+                    required
+                    class="input-style"
+                    placeholder="Memory title">
+
             </div>
-          </div>
-        `;
 
-        const mediaClicks = card.querySelectorAll(".media-preview-click");
-        mediaClicks.forEach(el => {
-          el.addEventListener("click", () => {
-            currentIndex = index;
-            updateModalDisplay();
-            viewModal.classList.remove("hidden");
-          });
-        });
 
-        container.appendChild(card);
-      });
+            <!-- TYPE -->
 
-      document.querySelectorAll(".delete-btn").forEach((btn) => {
-        btn.addEventListener("click", async () => {
-          if (confirm("ဒီအမှတ်တရလေးကို ဖျက်ပစ်ဖို့ သေချာပါသလား?")) {
-            if (btn.dataset.delId) {
-              await deleteDoc(doc(db, "couple_memories", btn.dataset.delId));
-            }
-          }
-        });
-      });
+            <div>
+
+                <label class="block text-sm font-medium text-slate-300 mb-2">
+                    Media Type
+                </label>
+
+                <select
+                    id="mediaType"
+                    class="input-style">
+
+                    <option value="image">
+                        Image
+                    </option>
+
+                    <option value="video">
+                        Video
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- DATE - OPTIONAL -->
+
+            <div>
+
+                <label class="block text-sm font-medium text-slate-300 mb-2">
+                    Date
+                    <span class="text-slate-600 ml-1">
+                        Optional
+                    </span>
+                </label>
+
+                <input
+                    id="mediaDate"
+                    type="date"
+                    class="input-style">
+
+            </div>
+
+
+            <!-- FILE -->
+
+            <div>
+
+                <label class="block text-sm font-medium text-slate-300 mb-2">
+                    Select File
+                </label>
+
+                <input
+                    id="mediaFile"
+                    type="file"
+                    required
+                    accept="image/*,video/*"
+                    class="w-full rounded-xl
+                           border border-white/10
+                           bg-slate-900/70
+                           text-slate-300
+                           p-3 text-sm
+                           file:mr-3
+                           file:rounded-lg
+                           file:border-0
+                           file:bg-rose-500
+                           file:text-white
+                           file:px-3
+                           file:py-2
+                           file:font-semibold">
+
+            </div>
+
+
+            <!-- PROGRESS -->
+
+            <div
+                id="progressContainer"
+                class="hidden">
+
+                <div class="flex justify-between text-xs mb-2">
+
+                    <span class="text-slate-400">
+                        Uploading...
+                    </span>
+
+                    <span
+                        id="progressText"
+                        class="text-rose-400 font-semibold">
+
+                        0%
+
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="h-2 rounded-full
+                           bg-slate-800 overflow-hidden">
+
+                    <div
+                        id="uploadProgress"
+                        class="h-full w-0
+                               bg-gradient-to-r
+                               from-rose-500
+                               to-purple-500
+                               rounded-full">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="submit"
+                id="uploadSubmitBtn"
+                class="btn-gradient w-full py-3.5
+                       rounded-xl font-bold text-white">
+
+                Upload Memory
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     FULLSCREEN VIEWER
+========================================================= -->
+
+<div
+    id="viewModal"
+    class="hidden fixed inset-0 z-[60]
+           bg-black/95 backdrop-blur-xl
+           flex items-center justify-center">
+
+    <button
+        id="closeViewModalBtn"
+        class="absolute top-5 right-5 z-20
+               w-11 h-11 rounded-xl
+               bg-white/10 hover:bg-white/20
+               border border-white/10
+               text-white text-2xl transition">
+
+        ×
+
+    </button>
+
+
+    <button
+        id="prevBtn"
+        class="absolute left-4 sm:left-7 z-20
+               w-11 h-11 rounded-xl
+               bg-white/10 hover:bg-white/20
+               border border-white/10
+               text-white text-2xl transition">
+
+        ‹
+
+    </button>
+
+
+    <button
+        id="nextBtn"
+        class="absolute right-4 sm:right-7 z-20
+               w-11 h-11 rounded-xl
+               bg-white/10 hover:bg-white/20
+               border border-white/10
+               text-white text-2xl transition">
+
+        ›
+
+    </button>
+
+
+    <div
+        class="w-full h-full
+               flex flex-col items-center justify-center
+               px-16 sm:px-24 py-16">
+
+        <div
+            id="modalMediaContent"
+            class="max-w-full max-h-[75vh]
+                   flex items-center justify-center">
+        </div>
+
+
+        <div class="text-center mt-5 max-w-2xl">
+
+            <h2
+                id="modalTitle"
+                class="text-lg sm:text-xl font-bold text-white">
+            </h2>
+
+            <p
+                id="modalDate"
+                class="text-sm text-slate-400 mt-1">
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     FIREBASE + APPLICATION JS
+========================================================= -->
+
+<script type="module">
+
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+
+
+import {
+    getAuth,
+    signInWithEmailAndPassword,
+    onAuthStateChanged,
+    signOut,
+    setPersistence,
+    inMemoryPersistence
+} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    onSnapshot,
+    deleteDoc,
+    doc,
+    query
+} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+
+
+/* =========================================================
+   CLOUDINARY CONFIG
+========================================================= */
+
+const CLOUDINARY_CLOUD_NAME = "vneswxx4";
+
+const CLOUDINARY_UPLOAD_PRESET = "myeunji";
+
+
+
+/* =========================================================
+   FIREBASE CONFIG
+========================================================= */
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyDZyW992JYkmfB9S9JskJNNyxX0wfjooBY",
+
+    authDomain:
+        "sweb-24fdc.firebaseapp.com",
+
+    projectId:
+        "sweb-24fdc",
+
+    storageBucket:
+        "sweb-24fdc.firebasestorage.app",
+
+    messagingSenderId:
+        "883021695279",
+
+    appId:
+        "1:883021695279:web:e44dc36321ee3ad40539da",
+
+    measurementId:
+        "G-B50ELELYBG"
+
+};
+
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+const app =
+    initializeApp(firebaseConfig);
+
+
+const auth =
+    getAuth(app);
+
+
+const db =
+    getFirestore(app);
+
+
+
+/* =========================================================
+   DOM
+========================================================= */
+
+const loginPage =
+    document.getElementById("loginPage");
+
+const mainApp =
+    document.getElementById("mainApp");
+
+const adminLoginForm =
+    document.getElementById("adminLoginForm");
+
+const logoutBtn =
+    document.getElementById("logoutBtn");
+
+const openUploadModalBtn =
+    document.getElementById("openUploadModalBtn");
+
+const uploadModal =
+    document.getElementById("uploadModal");
+
+const closeUploadModalBtn =
+    document.getElementById("closeUploadModalBtn");
+
+const uploadForm =
+    document.getElementById("uploadForm");
+
+const mediaContainer =
+    document.getElementById("mediaContainer");
+
+const viewModal =
+    document.getElementById("viewModal");
+
+const closeViewModalBtn =
+    document.getElementById("closeViewModalBtn");
+
+const prevBtn =
+    document.getElementById("prevBtn");
+
+const nextBtn =
+    document.getElementById("nextBtn");
+
+const modalMediaContent =
+    document.getElementById("modalMediaContent");
+
+const modalTitle =
+    document.getElementById("modalTitle");
+
+const modalDate =
+    document.getElementById("modalDate");
+
+const progressContainer =
+    document.getElementById("progressContainer");
+
+const uploadProgress =
+    document.getElementById("uploadProgress");
+
+const progressText =
+    document.getElementById("progressText");
+
+const uploadSubmitBtn =
+    document.getElementById("uploadSubmitBtn");
+
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+let memories = [];
+
+let currentViewIndex = 0;
+
+
+
+/* =========================================================
+   AUTH PERSISTENCE
+========================================================= */
+
+await setPersistence(
+    auth,
+    inMemoryPersistence
+);
+
+
+
+/* =========================================================
+   AUTH STATE
+========================================================= */
+
+onAuthStateChanged(
+    auth,
+    (user) => {
+
+        if (user) {
+
+            loginPage.classList.add(
+                "hidden"
+            );
+
+            mainApp.classList.remove(
+                "hidden"
+            );
+
+            loadMemories();
+
+        } else {
+
+            loginPage.classList.remove(
+                "hidden"
+            );
+
+            mainApp.classList.add(
+                "hidden"
+            );
+
+        }
+
     }
+);
 
-    // Real-time Upload Progress & Error Handling ပါဝင်သော XMLHttpRequest Function
-    const uploadToCloudinary = async (file) => {
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
 
-      const resourceType = file.type.startsWith('video/') ? 'video' : 'image';
-     
-      return new Promise((resolve, reject) => {
-        const xhr = new XMLHttpRequest();
-        xhr.open("POST", `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/${resourceType}/upload`);
 
-        xhr.upload.onprogress = (e) => {
-          if (e.lengthComputable) {
-            const percent = Math.round((e.loaded / e.total) * 100);
-            progressBar.style.width = `${percent}%`;
-            progressPercent.innerText = `${percent}%`;
-           
-            if (percent === 100) {
-              progressText.innerText = "Processing video on server... (ခဏစောင့်ပါ)";
-            }
-          }
-        };
+/* =========================================================
+   LOGIN
+========================================================= */
 
-        xhr.onload = () => {
-          if (xhr.status >= 200 && xhr.status < 300) {
-            const data = JSON.parse(xhr.responseText);
-            resolve(data.secure_url);
-          } else {
-            const errorData = JSON.parse(xhr.responseText);
-            reject(new Error(errorData.error?.message || "Upload failed"));
-          }
-        };
+adminLoginForm.addEventListener(
+    "submit",
+    async (event) => {
 
-        xhr.onerror = () => reject(new Error("Network Error / Connection Lost"));
-        xhr.send(formData);
-      });
-    };
+        event.preventDefault();
 
-    uploadForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const files = document.getElementById("uploadFile").files;
-      if (!files || files.length === 0) return alert("ဖိုင်ရွေးချယ်ပါ");
 
-      progressContainer.classList.remove("hidden");
-      submitBtn.disabled = true;
+        const email =
+            document
+                .getElementById("email")
+                .value
+                .trim();
 
-      const titleInput = document.getElementById("uploadTitle").value.trim();
-      const typeInput = document.getElementById("uploadType").value;
-      const dateInput = document.getElementById("uploadDate").value || "Special Moment";
 
-      let count = 0;
+        const password =
+            document
+                .getElementById("password")
+                .value;
 
-      for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-        progressText.innerText = `Uploading ${i + 1}/${files.length} (${file.name})...`;
-        progressBar.style.width = `0%`;
-        progressPercent.innerText = `0%`;
+
+        const button =
+            adminLoginForm.querySelector(
+                "button[type='submit']"
+            );
+
 
         try {
-          const uploadedUrl = await uploadToCloudinary(file);
-          const isVideo = file.type.startsWith('video/') || typeInput === 'Video';
 
-          const memoryItem = {
-            title: titleInput || file.name,
-            type: isVideo ? "Video" : "Photo",
-            date: dateInput,
-            url: uploadedUrl,
-            createdAt: Date.now()
-          };
+            button.disabled = true;
 
-          await addDoc(collection(db, "couple_memories"), memoryItem);
-          count++;
-        } catch (err) {
-          console.error("Upload error:", err);
-          alert(`Error uploading ${file.name}: ${err.message}`);
+            button.textContent =
+                "Signing In...";
+
+
+            await signInWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+
+
+        } catch (error) {
+
+            console.error(error);
+
+            alert(
+                "Login failed. Please check your email and password."
+            );
+
+
+        } finally {
+
+            button.disabled = false;
+
+            button.textContent =
+                "Sign In";
+
         }
-      }
 
-      if (count > 0) {
-        alert(`${count} ဖိုင် အောင်မြင်စွာ တင်ပြီးပါပြီ!`);
-      }
-     
-      progressContainer.classList.add("hidden");
-      submitBtn.disabled = false;
-      uploadForm.reset();
-      uploadModal.classList.add("hidden");
-    });
-  </script>
+    }
+);
+
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+logoutBtn.addEventListener(
+    "click",
+    async () => {
+
+        try {
+
+            await signOut(auth);
+
+        } catch (error) {
+
+            console.error(error);
+
+        }
+
+    }
+);
+
+
+
+/* =========================================================
+   LOAD MEMORIES
+========================================================= */
+
+function loadMemories() {
+
+    const memoriesRef =
+        collection(
+            db,
+            "couple_memories"
+        );
+
+
+    const q =
+        query(memoriesRef);
+
+
+    onSnapshot(
+        q,
+        (snapshot) => {
+
+            memories =
+                snapshot.docs.map(
+                    (item) => ({
+                        id: item.id,
+                        ...item.data()
+                    })
+                );
+
+
+            renderGallery();
+
+        },
+        (error) => {
+
+            console.error(
+                "Error loading memories:",
+                error
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =========================================================
+   RENDER GALLERY
+========================================================= */
+
+function renderGallery() {
+
+    mediaContainer.innerHTML = "";
+
+
+    if (memories.length === 0) {
+
+        mediaContainer.innerHTML = `
+
+            <div
+                class="empty-state
+                       col-span-full
+                       rounded-3xl
+                       p-12
+                       text-center">
+
+                <div class="text-5xl mb-4">
+                    💗
+                </div>
+
+                <h3 class="text-xl font-bold text-white">
+                    No Memories Yet
+                </h3>
+
+                <p class="text-slate-500 mt-2">
+                    Upload your first memory to get started.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    memories.forEach(
+        (memory, index) => {
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "memory-card group cursor-pointer";
+
+
+            const mediaWrapper =
+                document.createElement(
+                    "div"
+                );
+
+
+            mediaWrapper.className =
+                "relative aspect-[4/3] overflow-hidden bg-slate-900";
+
+
+            let mediaElement;
+
+
+            if (
+                memory.type ===
+                "video"
+            ) {
+
+                mediaElement =
+                    document.createElement(
+                        "video"
+                    );
+
+
+                mediaElement.controls =
+                    false;
+
+                mediaElement.muted =
+                    true;
+
+                mediaElement.playsInline =
+                    true;
+
+
+                mediaElement.className =
+                    "memory-media w-full h-full object-cover";
+
+
+                mediaElement.src =
+                    memory.url;
+
+            } else {
+
+                mediaElement =
+                    document.createElement(
+                        "img"
+                    );
+
+
+                mediaElement.loading =
+                    "lazy";
+
+
+                mediaElement.className =
+                    "memory-media w-full h-full object-cover";
+
+
+                mediaElement.src =
+                    memory.url;
+
+
+                mediaElement.alt =
+                    memory.title ||
+                    "Memory";
+
+            }
+
+
+            mediaWrapper.appendChild(
+                mediaElement
+            );
+
+
+            const overlay =
+                document.createElement(
+                    "div"
+                );
+
+
+            overlay.className =
+                "absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent opacity-70";
+
+
+            mediaWrapper.appendChild(
+                overlay
+            );
+
+
+            card.appendChild(
+                mediaWrapper
+            );
+
+
+            const content =
+                document.createElement(
+                    "div"
+                );
+
+
+            content.className =
+                "p-4";
+
+
+            const title =
+                document.createElement(
+                    "h3"
+                );
+
+
+            title.className =
+                "font-bold text-white truncate";
+
+
+            title.textContent =
+                memory.title ||
+                "Untitled Memory";
+
+
+            const meta =
+                document.createElement(
+                    "div"
+                );
+
+
+            meta.className =
+                "flex items-center justify-between gap-3 mt-2";
+
+
+            const date =
+                document.createElement(
+                    "p"
+                );
+
+
+            date.className =
+                "text-xs text-slate-500";
+
+
+            date.textContent =
+                memory.date ||
+                "";
+
+
+            const type =
+                document.createElement(
+                    "span"
+                );
+
+
+            type.className =
+                "text-[10px] uppercase tracking-wider font-bold px-2 py-1 rounded-md bg-rose-500/10 text-rose-400 border border-rose-500/10";
+
+
+            type.textContent =
+                memory.type ||
+                "image";
+
+
+            meta.appendChild(
+                date
+            );
+
+
+            meta.appendChild(
+                type
+            );
+
+
+            content.appendChild(
+                title
+            );
+
+
+            content.appendChild(
+                meta
+            );
+
+
+            const deleteButton =
+                document.createElement(
+                    "button"
+                );
+
+
+            deleteButton.className =
+                "mt-4 w-full py-2 rounded-xl text-sm font-semibold bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/10 transition";
+
+
+            deleteButton.textContent =
+                "Delete";
+
+
+            deleteButton.addEventListener(
+                "click",
+                async (event) => {
+
+                    event.stopPropagation();
+
+
+                    const confirmed =
+                        confirm(
+                            "Are you sure you want to delete this memory?"
+                        );
+
+
+                    if (!confirmed) {
+                        return;
+                    }
+
+
+                    try {
+
+                        await deleteDoc(
+                            doc(
+                                db,
+                                "couple_memories",
+                                memory.id
+                            )
+                        );
+
+
+                    } catch (error) {
+
+                        console.error(
+                            error
+                        );
+
+
+                        alert(
+                            "Failed to delete this memory."
+                        );
+
+                    }
+
+                }
+            );
+
+
+            content.appendChild(
+                deleteButton
+            );
+
+
+            card.appendChild(
+                content
+            );
+
+
+            card.addEventListener(
+                "click",
+                () => {
+
+                    openViewer(
+                        index
+                    );
+
+                }
+            );
+
+
+            mediaContainer.appendChild(
+                card
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =========================================================
+   OPEN UPLOAD MODAL
+========================================================= */
+
+openUploadModalBtn.addEventListener(
+    "click",
+    () => {
+
+        uploadModal.classList.remove(
+            "hidden"
+        );
+
+    }
+);
+
+
+
+/* =========================================================
+   CLOSE UPLOAD MODAL
+========================================================= */
+
+closeUploadModalBtn.addEventListener(
+    "click",
+    () => {
+
+        uploadModal.classList.add(
+            "hidden"
+        );
+
+    }
+);
+
+
+uploadModal.addEventListener(
+    "click",
+    (event) => {
+
+        if (
+            event.target ===
+            uploadModal
+        ) {
+
+            uploadModal.classList.add(
+                "hidden"
+            );
+
+        }
+
+    }
+);
+
+
+
+/* =========================================================
+   CLOUDINARY UPLOAD
+========================================================= */
+
+function uploadToCloudinary(
+    file,
+    onProgress
+) {
+
+    return new Promise(
+        (resolve, reject) => {
+
+            const formData =
+                new FormData();
+
+
+            formData.append(
+                "file",
+                file
+            );
+
+
+            formData.append(
+                "upload_preset",
+                CLOUDINARY_UPLOAD_PRESET
+            );
+
+
+            const xhr =
+                new XMLHttpRequest();
+
+
+            xhr.open(
+                "POST",
+                `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/auto/upload`
+            );
+
+
+            xhr.upload.addEventListener(
+                "progress",
+                (event) => {
+
+                    if (
+                        event.lengthComputable
+                    ) {
+
+                        const percent =
+                            Math.round(
+                                (
+                                    event.loaded /
+                                    event.total
+                                ) * 100
+                            );
+
+
+                        onProgress(
+                            percent
+                        );
+
+                    }
+
+                }
+            );
+
+
+            xhr.onload =
+                () => {
+
+                    if (
+                        xhr.status >= 200 &&
+                        xhr.status < 300
+                    ) {
+
+                        try {
+
+                            const response =
+                                JSON.parse(
+                                    xhr.responseText
+                                );
+
+
+                            resolve(
+                                response
+                            );
+
+
+                        } catch (error) {
+
+                            reject(
+                                error
+                            );
+
+                        }
+
+                    } else {
+
+                        reject(
+                            new Error(
+                                "Cloudinary upload failed."
+                            )
+                        );
+
+                    }
+
+                };
+
+
+            xhr.onerror =
+                () => {
+
+                    reject(
+                        new Error(
+                            "Network error during upload."
+                        )
+                    );
+
+                };
+
+
+            xhr.send(
+                formData
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =========================================================
+   UPLOAD FORM
+========================================================= */
+
+uploadForm.addEventListener(
+    "submit",
+    async (event) => {
+
+        event.preventDefault();
+
+
+        const title =
+            document
+                .getElementById("mediaTitle")
+                .value
+                .trim();
+
+
+        const type =
+            document
+                .getElementById("mediaType")
+                .value;
+
+
+        /*
+            DATE IS OPTIONAL.
+            If the user does not select a date,
+            this will simply be an empty string.
+        */
+
+        const date =
+            document
+                .getElementById("mediaDate")
+                .value;
+
+
+        const fileInput =
+            document.getElementById(
+                "mediaFile"
+            );
+
+
+        const file =
+            fileInput.files[0];
+
+
+        if (!file) {
+
+            alert(
+                "Please select a file."
+            );
+
+            return;
+        }
+
+
+        try {
+
+            uploadSubmitBtn.disabled =
+                true;
+
+
+            uploadSubmitBtn.textContent =
+                "Uploading...";
+
+
+            progressContainer.classList.remove(
+                "hidden"
+            );
+
+
+            uploadProgress.style.width =
+                "0%";
+
+
+            progressText.textContent =
+                "0%";
+
+
+            const result =
+                await uploadToCloudinary(
+                    file,
+                    (percent) => {
+
+                        uploadProgress.style.width =
+                            `${percent}%`;
+
+
+                        progressText.textContent =
+                            `${percent}%`;
+
+                    }
+                );
+
+
+            await addDoc(
+                collection(
+                    db,
+                    "couple_memories"
+                ),
+                {
+                    title: title,
+                    type: type,
+
+                    /*
+                        Empty string if no date
+                        was selected.
+                    */
+
+                    date: date,
+
+                    url:
+                        result.secure_url,
+
+                    public_id:
+                        result.public_id,
+
+                    createdAt:
+                        Date.now()
+                }
+            );
+
+
+            uploadForm.reset();
+
+
+            uploadProgress.style.width =
+                "100%";
+
+
+            progressText.textContent =
+                "100%";
+
+
+            setTimeout(
+                () => {
+
+                    progressContainer.classList.add(
+                        "hidden"
+                    );
+
+
+                    uploadModal.classList.add(
+                        "hidden"
+                    );
+
+                },
+                500
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                error
+            );
+
+
+            alert(
+                "Upload failed. Please try again."
+            );
+
+
+        } finally {
+
+            uploadSubmitBtn.disabled =
+                false;
+
+
+            uploadSubmitBtn.textContent =
+                "Upload Memory";
+
+        }
+
+    }
+);
+
+
+
+/* =========================================================
+   VIEWER
+========================================================= */
+
+function openViewer(index) {
+
+    if (
+        index < 0 ||
+        index >= memories.length
+    ) {
+        return;
+    }
+
+
+    currentViewIndex =
+        index;
+
+
+    renderViewer();
+
+
+    viewModal.classList.remove(
+        "hidden"
+    );
+
+}
+
+
+
+function renderViewer() {
+
+    const memory =
+        memories[
+            currentViewIndex
+        ];
+
+
+    if (!memory) {
+        return;
+    }
+
+
+    modalMediaContent.innerHTML =
+        "";
+
+
+    let media;
+
+
+    if (
+        memory.type ===
+        "video"
+    ) {
+
+        media =
+            document.createElement(
+                "video"
+            );
+
+
+        media.controls =
+            true;
+
+        media.autoplay =
+            true;
+
+        media.playsInline =
+            true;
+
+
+        media.className =
+            "max-w-full max-h-[75vh] rounded-2xl shadow-2xl";
+
+
+    } else {
+
+        media =
+            document.createElement(
+                "img"
+            );
+
+
+        media.className =
+            "max-w-full max-h-[75vh] object-contain rounded-2xl shadow-2xl";
+
+
+        media.alt =
+            memory.title ||
+            "Memory";
+
+    }
+
+
+    media.src =
+        memory.url;
+
+
+    modalMediaContent.appendChild(
+        media
+    );
+
+
+    modalTitle.textContent =
+        memory.title ||
+        "Untitled Memory";
+
+
+    /*
+        If date is empty,
+        nothing will be shown.
+    */
+
+    modalDate.textContent =
+        memory.date ||
+        "";
+
+}
+
+
+
+/* =========================================================
+   NEXT
+========================================================= */
+
+nextBtn.addEventListener(
+    "click",
+    (event) => {
+
+        event.stopPropagation();
+
+
+        if (
+            memories.length === 0
+        ) {
+            return;
+        }
+
+
+        currentViewIndex =
+            (
+                currentViewIndex + 1
+            ) %
+            memories.length;
+
+
+        renderViewer();
+
+    }
+);
+
+
+
+/* =========================================================
+   PREVIOUS
+========================================================= */
+
+prevBtn.addEventListener(
+    "click",
+    (event) => {
+
+        event.stopPropagation();
+
+
+        if (
+            memories.length === 0
+        ) {
+            return;
+        }
+
+
+        currentViewIndex =
+            (
+                currentViewIndex - 1 +
+                memories.length
+            ) %
+            memories.length;
+
+
+        renderViewer();
+
+    }
+);
+
+
+
+/* =========================================================
+   CLOSE VIEWER
+========================================================= */
+
+closeViewModalBtn.addEventListener(
+    "click",
+    () => {
+
+        viewModal.classList.add(
+            "hidden"
+        );
+
+
+        modalMediaContent.innerHTML =
+            "";
+
+    }
+);
+
+
+viewModal.addEventListener(
+    "click",
+    (event) => {
+
+        if (
+            event.target ===
+            viewModal
+        ) {
+
+            viewModal.classList.add(
+                "hidden"
+            );
+
+
+            modalMediaContent.innerHTML =
+                "";
+
+        }
+
+    }
+);
+
+
+
+/* =========================================================
+   KEYBOARD CONTROLS
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    (event) => {
+
+        if (
+            viewModal.classList.contains(
+                "hidden"
+            )
+        ) {
+            return;
+        }
+
+
+        if (
+            event.key ===
+            "Escape"
+        ) {
+
+            viewModal.classList.add(
+                "hidden"
+            );
+
+
+            modalMediaContent.innerHTML =
+                "";
+
+        }
+
+
+        if (
+            event.key ===
+            "ArrowRight"
+        ) {
+
+            nextBtn.click();
+
+        }
+
+
+        if (
+            event.key ===
+            "ArrowLeft"
+        ) {
+
+            prevBtn.click();
+
+        }
+
+    }
+);
+
+
+
+/* =========================================================
+   INITIAL AUTH RESET
+========================================================= */
+
+try {
+
+    await signOut(
+        auth
+    );
+
+} catch (error) {
+
+    console.error(
+        error
+    );
+
+}
+
+</script>
+
 </body>
 </html>
