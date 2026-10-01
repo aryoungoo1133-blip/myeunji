@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>My Eunji N SXYY FOTOSS</title>
 
     <link rel="icon" type="image/jpeg" href="favicon.jpg">
@@ -34,6 +35,12 @@
     </script>
 
     <style>
+        :root {
+            --glass-bg: rgba(255,255,255,0.055);
+            --glass-border: rgba(255,255,255,0.10);
+            --glass-shadow: 0 25px 80px rgba(0,0,0,0.35);
+        }
+
         * {
             box-sizing: border-box;
         }
@@ -45,12 +52,12 @@
         body {
             margin: 0;
             min-height: 100vh;
-            background:
-                radial-gradient(circle at 15% 10%, rgba(244,63,94,.13), transparent 28%),
-                radial-gradient(circle at 85% 15%, rgba(168,85,247,.11), transparent 30%),
-                radial-gradient(circle at 50% 100%, rgba(59,130,246,.06), transparent 35%),
-                #020617;
             color: #f8fafc;
+            background:
+                radial-gradient(circle at 10% 10%, rgba(244,63,94,.13), transparent 30%),
+                radial-gradient(circle at 90% 15%, rgba(139,92,246,.12), transparent 28%),
+                radial-gradient(circle at 50% 100%, rgba(59,130,246,.08), transparent 35%),
+                #05060a;
             font-family:
                 Inter,
                 ui-sans-serif,
@@ -66,12 +73,14 @@
             position: fixed;
             inset: 0;
             pointer-events: none;
-            opacity: .035;
-            background-image:
-                linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px);
-            background-size: 40px 40px;
-            mask-image: linear-gradient(to bottom, black, transparent);
+            background:
+                linear-gradient(
+                    120deg,
+                    rgba(255,255,255,.025),
+                    transparent 30%,
+                    rgba(255,255,255,.015)
+                );
+            z-index: -1;
         }
 
         ::selection {
@@ -79,196 +88,70 @@
             color: white;
         }
 
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #020617;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(#f43f5e, #a855f7);
-            border-radius: 999px;
-        }
-
         .glass {
-            background: rgba(15,23,42,.68);
-            border: 1px solid rgba(255,255,255,.08);
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255,255,255,.075),
+                    rgba(255,255,255,.025)
+                );
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(24px) saturate(150%);
+            -webkit-backdrop-filter: blur(24px) saturate(150%);
+            box-shadow:
+                inset 0 1px 0 rgba(255,255,255,.06),
+                0 20px 60px rgba(0,0,0,.18);
         }
 
         .glass-strong {
-            background: rgba(2,6,23,.84);
-            border: 1px solid rgba(255,255,255,.09);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(20,20,28,.84),
+                    rgba(10,10,16,.70)
+                );
+            border: 1px solid rgba(255,255,255,.10);
+            backdrop-filter: blur(30px) saturate(160%);
+            -webkit-backdrop-filter: blur(30px) saturate(160%);
+            box-shadow:
+                inset 0 1px 0 rgba(255,255,255,.07),
+                0 30px 100px rgba(0,0,0,.45);
+        }
+
+        .glow {
+            box-shadow:
+                0 0 0 1px rgba(244,63,94,.04),
+                0 25px 100px rgba(244,63,94,.10),
+                0 25px 100px rgba(139,92,246,.08);
         }
 
         .brand-text {
             background: linear-gradient(
                 90deg,
-                #fb7185,
-                #f43f5e,
-                #c084fc,
-                #fb7185
+                #fff,
+                #fda4af,
+                #c4b5fd,
+                #fff
             );
-            background-size: 300% auto;
+            background-size: 300% 100%;
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            animation: gradientMove 5s linear infinite;
+            animation: gradientMove 8s ease infinite;
         }
 
         @keyframes gradientMove {
-            0% {
-                background-position: 0% center;
+            0%,100% {
+                background-position: 0% 50%;
             }
 
-            100% {
-                background-position: 300% center;
+            50% {
+                background-position: 100% 50%;
             }
-        }
-
-        .glow {
-            box-shadow:
-                0 0 30px rgba(244,63,94,.10),
-                0 20px 70px rgba(0,0,0,.35);
-        }
-
-        .btn-gradient {
-            background: linear-gradient(
-                135deg,
-                #f43f5e,
-                #e11d48,
-                #9333ea
-            );
-            background-size: 200% 200%;
-            transition:
-                transform .25s ease,
-                box-shadow .25s ease,
-                background-position .35s ease;
-        }
-
-        .btn-gradient:hover {
-            transform: translateY(-2px);
-            background-position: 100% 0;
-            box-shadow:
-                0 10px 35px rgba(244,63,94,.28),
-                0 0 25px rgba(168,85,247,.15);
-        }
-
-        .btn-gradient:active {
-            transform: translateY(0) scale(.98);
-        }
-
-        .memory-card {
-            overflow: hidden;
-            border-radius: 22px;
-            background: rgba(15,23,42,.72);
-            border: 1px solid rgba(255,255,255,.07);
-            box-shadow: 0 15px 50px rgba(0,0,0,.28);
-            transition:
-                transform .35s ease,
-                border-color .35s ease,
-                box-shadow .35s ease;
-        }
-
-        .memory-card:hover {
-            transform: translateY(-7px);
-            border-color: rgba(244,63,94,.30);
-            box-shadow:
-                0 25px 70px rgba(0,0,0,.42),
-                0 0 30px rgba(244,63,94,.08);
-        }
-
-        .memory-media {
-            transition:
-                transform .55s cubic-bezier(.2,.8,.2,1);
-        }
-
-        .memory-card:hover .memory-media {
-            transform: scale(1.045);
-        }
-
-        .modal-backdrop {
-            animation: fadeIn .22s ease forwards;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        .modal-box {
-            animation: modalUp .28s cubic-bezier(.2,.8,.2,1) forwards;
-        }
-
-        @keyframes modalUp {
-            from {
-                opacity: 0;
-                transform: translateY(18px) scale(.97);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        .login-card {
-            animation: loginAppear .6s cubic-bezier(.2,.8,.2,1);
-        }
-
-        @keyframes loginAppear {
-            from {
-                opacity: 0;
-                transform: translateY(25px) scale(.96);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        .input-style {
-            width: 100%;
-            border-radius: 14px;
-            border: 1px solid rgba(255,255,255,.08);
-            background: rgba(15,23,42,.75);
-            color: white;
-            padding: 13px 15px;
-            outline: none;
-            transition:
-                border-color .25s ease,
-                box-shadow .25s ease,
-                background .25s ease;
-        }
-
-        .input-style::placeholder {
-            color: #64748b;
-        }
-
-        .input-style:focus {
-            border-color: rgba(244,63,94,.65);
-            background: rgba(15,23,42,.95);
-            box-shadow: 0 0 0 4px rgba(244,63,94,.08);
-        }
-
-        .empty-state {
-            border: 1px dashed rgba(255,255,255,.10);
-            background: rgba(15,23,42,.38);
         }
 
         .heart-pulse {
-            animation: heartPulse 1.8s ease-in-out infinite;
+            animation: heartPulse 2.2s ease-in-out infinite;
         }
 
         @keyframes heartPulse {
@@ -277,7 +160,173 @@
             }
 
             50% {
-                transform: scale(1.12);
+                transform: scale(1.06);
+            }
+        }
+
+        .input-style {
+            width: 100%;
+            border-radius: 14px;
+            border: 1px solid rgba(255,255,255,.09);
+            background: rgba(3,7,18,.68);
+            color: white;
+            padding: 13px 14px;
+            outline: none;
+            transition: .25s ease;
+        }
+
+        .input-style::placeholder {
+            color: #64748b;
+        }
+
+        .input-style:focus {
+            border-color: rgba(244,63,94,.55);
+            box-shadow:
+                0 0 0 4px rgba(244,63,94,.08),
+                0 0 35px rgba(244,63,94,.08);
+        }
+
+        .btn-gradient {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(
+                135deg,
+                #e11d48,
+                #f43f5e 45%,
+                #8b5cf6
+            );
+            box-shadow:
+                0 12px 30px rgba(244,63,94,.18);
+            transition:
+                transform .2s ease,
+                box-shadow .2s ease,
+                filter .2s ease;
+        }
+
+        .btn-gradient:hover {
+            transform: translateY(-1px);
+            filter: brightness(1.08);
+            box-shadow:
+                0 18px 40px rgba(244,63,94,.24);
+        }
+
+        .btn-gradient:active {
+            transform: translateY(0);
+        }
+
+        .btn-gradient::after {
+            content: "";
+            position: absolute;
+            top: -100%;
+            left: -40%;
+            width: 25%;
+            height: 300%;
+            transform: rotate(25deg);
+            background: rgba(255,255,255,.18);
+            transition: left .6s ease;
+        }
+
+        .btn-gradient:hover::after {
+            left: 120%;
+        }
+
+        .memory-card {
+            overflow: hidden;
+            border-radius: 22px;
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,.07),
+                    rgba(255,255,255,.025)
+                );
+            border: 1px solid rgba(255,255,255,.075);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow:
+                0 20px 50px rgba(0,0,0,.20),
+                inset 0 1px 0 rgba(255,255,255,.04);
+            transition:
+                transform .25s ease,
+                border-color .25s ease,
+                box-shadow .25s ease;
+        }
+
+        .memory-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(244,63,94,.22);
+            box-shadow:
+                0 28px 70px rgba(0,0,0,.32),
+                0 0 35px rgba(244,63,94,.07);
+        }
+
+        .memory-media {
+            transition: transform .45s ease;
+        }
+
+        .memory-card:hover .memory-media {
+            transform: scale(1.045);
+        }
+
+        .empty-state {
+            background: rgba(255,255,255,.035);
+            border: 1px dashed rgba(255,255,255,.10);
+        }
+
+        .modal-backdrop {
+            animation: fadeIn .2s ease;
+        }
+
+        .modal-box {
+            animation: modalIn .25s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px) scale(.98);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* YouTube */
+        .youtube-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .youtube-section::before {
+            content: "";
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            top: -120px;
+            right: -80px;
+            background: rgba(244,63,94,.12);
+            filter: blur(70px);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .youtube-error {
+            border: 1px solid rgba(248,113,113,.15);
+            background: rgba(127,29,29,.12);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important;
             }
         }
     </style>
@@ -285,1792 +334,647 @@
 
 <body>
 
-<!-- =========================================================
-     ADMIN LOGIN
-========================================================= -->
-
-<div
-    id="loginPage"
-    class="min-h-screen flex items-center justify-center px-5 py-10">
-
+<!-- LOGIN -->
+<div id="loginPage" class="min-h-screen flex items-center justify-center px-5 py-10">
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
         <div class="absolute -top-32 -left-32 w-96 h-96 bg-rose-500/10 rounded-full blur-3xl"></div>
         <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
     </div>
 
-    <div
-        class="login-card glass-strong glow w-full max-w-md rounded-3xl p-7 sm:p-9 relative">
-
+    <div class="login-card glass-strong glow w-full max-w-md rounded-3xl p-7 sm:p-9 relative">
         <div class="text-center mb-8">
-
-            <div
-                class="heart-pulse inline-flex items-center justify-center
-                       w-16 h-16 rounded-2xl
-                       bg-gradient-to-br from-rose-500/20 to-purple-500/20
-                       border border-rose-400/20 mb-5">
-
+            <div class="heart-pulse inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-rose-500/20 to-purple-500/20 border border-rose-400/20 mb-5">
                 <span class="text-3xl">❤️</span>
-
             </div>
-
             <h1 class="text-3xl sm:text-4xl font-black tracking-tight brand-text">
                 My Eunji N SXYY FOTOSS
             </h1>
-
             <p class="text-slate-400 mt-3 text-sm">
                 Private Memory Vault
             </p>
-
         </div>
-
 
         <form id="adminLoginForm" class="space-y-5">
-
             <div>
-
-                <label class="block text-sm font-medium text-slate-300 mb-2">
-                    Email Address
-                </label>
-
-                <input
-                    id="email"
-                    type="email"
-                    required
-                    autocomplete="email"
-                    class="input-style"
-                    placeholder="Enter your email">
-
+                <label class="block text-sm font-medium text-slate-300 mb-2">Email Address</label>
+                <input id="email" type="email" required autocomplete="email" class="input-style" placeholder="Enter your email">
             </div>
-
-
             <div>
-
-                <label class="block text-sm font-medium text-slate-300 mb-2">
-                    Password
-                </label>
-
-                <input
-                    id="password"
-                    type="password"
-                    required
-                    autocomplete="current-password"
-                    class="input-style"
-                    placeholder="Enter your password">
-
+                <label class="block text-sm font-medium text-slate-300 mb-2">Password</label>
+                <input id="password" type="password" required autocomplete="current-password" class="input-style" placeholder="Enter your password">
             </div>
-
-
-            <button
-                type="submit"
-                class="btn-gradient w-full py-3.5 rounded-xl font-bold text-white">
-
-                Sign In
-
-            </button>
-
+            <button type="submit" class="btn-gradient w-full py-3.5 rounded-xl font-bold text-white">Sign In</button>
         </form>
-
     </div>
-
 </div>
 
 
-<!-- =========================================================
-     MAIN APP
-========================================================= -->
-
+<!-- MAIN APP -->
 <div id="mainApp" class="hidden min-h-screen">
-
     <header class="sticky top-0 z-40 glass-strong border-b border-white/5">
-
         <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4">
-
             <div class="flex items-center justify-between gap-4">
-
                 <div class="min-w-0">
-
-                    <h1 class="brand-text text-xl sm:text-2xl font-black truncate">
-                        My Eunji N SXYY FOTOSS
-                    </h1>
-
-                    <p class="text-xs text-slate-500 mt-0.5">
-                        Private Memory Vault
-                    </p>
-
+                    <h1 class="brand-text text-xl sm:text-2xl font-black truncate">My Eunji N SXYY FOTOSS</h1>
+                    <p class="text-xs text-slate-500 mt-0.5">Private Memory Vault</p>
                 </div>
-
-
                 <div class="flex items-center gap-2">
-
-                    <button
-                        id="openUploadModalBtn"
-                        class="btn-gradient flex items-center gap-2
-                               px-4 py-2.5 rounded-xl
-                               text-sm font-bold text-white
-                               whitespace-nowrap">
-
+                    <button id="openUploadModalBtn" class="btn-gradient flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold text-white whitespace-nowrap">
                         <span class="text-lg leading-none">+</span>
-
-                        <span class="hidden sm:inline">
-                            Upload Memory
-                        </span>
-
+                        <span class="hidden sm:inline">Upload Memory</span>
                     </button>
-
-
-                    <button
-                        id="logoutBtn"
-                        class="px-4 py-2.5 rounded-xl
-                               text-sm font-semibold
-                               bg-slate-800/80 hover:bg-slate-700
-                               border border-white/5
-                               text-slate-300 hover:text-white
-                               transition">
-
-                        Logout
-
-                    </button>
-
+                    <button id="logoutBtn" class="px-4 py-2.5 rounded-xl text-sm font-semibold bg-slate-800/80 hover:bg-slate-700 border border-white/5 text-slate-300 hover:text-white transition">Logout</button>
                 </div>
-
             </div>
-
         </div>
-
     </header>
 
-
     <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+        <!-- YOUTUBE LINK PLAYER -->
+        <section class="youtube-section glass-strong rounded-3xl p-5 sm:p-7 mb-8">
+            <div class="relative z-10">
+                <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-5">
+                    <div class="flex items-center gap-2">
+                        <div class="w-10 h-10 rounded-xl bg-red-500/10 border border-red-500/15 flex items-center justify-center">
+                            <span class="text-xl">▶️</span>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-bold text-white">YouTube Player</h2>
+                            <p class="text-xs text-slate-500">Paste any YouTube Link or Video ID to watch directly</p>
+                        </div>
+                    </div>
+                </div>
 
-        <div
-            id="mediaContainer"
-            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-        </div>
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <input id="youtubeSearchInput" type="text" class="input-style flex-1" placeholder="Paste YouTube Link (e.g. https://www.youtube.com/watch?v=dQw4w9WgXcQ)">
+                    <button id="youtubeSearchBtn" type="button" class="btn-gradient px-6 py-3 rounded-xl font-bold text-white flex items-center justify-center gap-2">
+                        <span>▶️</span>
+                        <span>Play Video</span>
+                    </button>
+                </div>
 
+                <div id="youtubeStatus" class="hidden mt-5"></div>
+                <div id="youtubeResults" class="mt-6"></div>
+            </div>
+        </section>
+
+        <!-- MEMORY GALLERY -->
+        <div id="mediaContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"></div>
     </main>
-
 </div>
 
 
-<!-- =========================================================
-     UPLOAD MODAL
-========================================================= -->
-
-<div
-    id="uploadModal"
-    class="hidden fixed inset-0 z-50 modal-backdrop
-           bg-black/75 backdrop-blur-md
-           flex items-center justify-center p-4">
-
-    <div
-        class="modal-box glass-strong glow
-               w-full max-w-lg rounded-3xl p-6 sm:p-7">
-
+<!-- UPLOAD MODAL -->
+<div id="uploadModal" class="hidden fixed inset-0 z-50 modal-backdrop bg-black/75 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="modal-box glass-strong glow w-full max-w-lg rounded-3xl p-6 sm:p-7">
         <div class="flex items-center justify-between mb-6">
-
             <div>
-
-                <h2 class="text-xl font-bold text-white">
-                    Upload Memory
-                </h2>
-
-                <p class="text-sm text-slate-500 mt-1">
-                    Add a new photo or video
-                </p>
-
+                <h2 class="text-xl font-bold text-white">Upload Memory</h2>
+                <p class="text-sm text-slate-500 mt-1">Add a new photo or video</p>
             </div>
-
-
-            <button
-                id="closeUploadModalBtn"
-                class="w-10 h-10 rounded-xl
-                       bg-slate-800/80 hover:bg-slate-700
-                       text-slate-300 hover:text-white
-                       transition text-xl">
-
-                ×
-
-            </button>
-
+            <button id="closeUploadModalBtn" class="w-10 h-10 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white transition text-xl">×</button>
         </div>
-
 
         <form id="uploadForm" class="space-y-5">
-
-            <!-- TITLE -->
-
             <div>
-
-                <label class="block text-sm font-medium text-slate-300 mb-2">
-                    Title
-                </label>
-
-                <input
-                    id="mediaTitle"
-                    type="text"
-                    required
-                    class="input-style"
-                    placeholder="Memory title">
-
+                <label class="block text-sm font-medium text-slate-300 mb-2">Title</label>
+                <input id="mediaTitle" type="text" required class="input-style" placeholder="Memory title">
             </div>
-
-
-            <!-- TYPE -->
-
             <div>
-
-                <label class="block text-sm font-medium text-slate-300 mb-2">
-                    Media Type
-                </label>
-
-                <select
-                    id="mediaType"
-                    class="input-style">
-
-                    <option value="image">
-                        Image
-                    </option>
-
-                    <option value="video">
-                        Video
-                    </option>
-
+                <label class="block text-sm font-medium text-slate-300 mb-2">Media Type</label>
+                <select id="mediaType" class="input-style">
+                    <option value="image">Image</option>
+                    <option value="video">Video</option>
                 </select>
-
             </div>
-
-
-            <!-- DATE - OPTIONAL -->
-
             <div>
-
-                <label class="block text-sm font-medium text-slate-300 mb-2">
-                    Date
-                    <span class="text-slate-600 ml-1">
-                        Optional
-                    </span>
-                </label>
-
-                <input
-                    id="mediaDate"
-                    type="date"
-                    class="input-style">
-
+                <label class="block text-sm font-medium text-slate-300 mb-2">Date <span class="text-slate-600 ml-1">Optional</span></label>
+                <input id="mediaDate" type="date" class="input-style">
             </div>
-
-
-            <!-- FILE -->
-
             <div>
-
-                <label class="block text-sm font-medium text-slate-300 mb-2">
-                    Select File
-                </label>
-
-                <input
-                    id="mediaFile"
-                    type="file"
-                    required
-                    accept="image/*,video/*"
-                    class="w-full rounded-xl
-                           border border-white/10
-                           bg-slate-900/70
-                           text-slate-300
-                           p-3 text-sm
-                           file:mr-3
-                           file:rounded-lg
-                           file:border-0
-                           file:bg-rose-500
-                           file:text-white
-                           file:px-3
-                           file:py-2
-                           file:font-semibold">
-
+                <label class="block text-sm font-medium text-slate-300 mb-2">Select File</label>
+                <input id="mediaFile" type="file" required accept="image/*,video/*" class="w-full rounded-xl border border-white/10 bg-slate-900/70 text-slate-300 p-3 text-sm file:mr-3 file:rounded-lg file:border-0 file:bg-rose-500 file:text-white file:px-3 file:py-2 file:font-semibold">
             </div>
-
-
-            <!-- PROGRESS -->
-
-            <div
-                id="progressContainer"
-                class="hidden">
-
+            <div id="progressContainer" class="hidden">
                 <div class="flex justify-between text-xs mb-2">
-
-                    <span class="text-slate-400">
-                        Uploading...
-                    </span>
-
-                    <span
-                        id="progressText"
-                        class="text-rose-400 font-semibold">
-
-                        0%
-
-                    </span>
-
+                    <span class="text-slate-400">Uploading...</span>
+                    <span id="progressText" class="text-rose-400 font-semibold">0%</span>
                 </div>
-
-
-                <div
-                    class="h-2 rounded-full
-                           bg-slate-800 overflow-hidden">
-
-                    <div
-                        id="uploadProgress"
-                        class="h-full w-0
-                               bg-gradient-to-r
-                               from-rose-500
-                               to-purple-500
-                               rounded-full">
-
-                    </div>
-
+                <div class="h-2 rounded-full bg-slate-800 overflow-hidden">
+                    <div id="uploadProgress" class="h-full w-0 bg-gradient-to-r from-rose-500 to-purple-500 rounded-full"></div>
                 </div>
-
             </div>
-
-
-            <button
-                type="submit"
-                id="uploadSubmitBtn"
-                class="btn-gradient w-full py-3.5
-                       rounded-xl font-bold text-white">
-
-                Upload Memory
-
-            </button>
-
+            <button type="submit" id="uploadSubmitBtn" class="btn-gradient w-full py-3.5 rounded-xl font-bold text-white">Upload Memory</button>
         </form>
-
     </div>
-
 </div>
 
 
-<!-- =========================================================
-     FULLSCREEN VIEWER
-========================================================= -->
+<!-- MEMORY FULLSCREEN VIEWER -->
+<div id="viewModal" class="hidden fixed inset-0 z-[60] bg-black/95 backdrop-blur-xl flex items-center justify-center">
+    <button id="closeViewModalBtn" class="absolute top-5 right-5 z-20 w-11 h-11 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 text-white text-2xl transition">×</button>
+    <button id="prevBtn" class="absolute left-4 sm:left-7 z-20 w-11 h-11 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 text-white text-2xl transition">‹</button>
+    <button id="nextBtn" class="absolute right-4 sm:right-7 z-20 w-11 h-11 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 text-white text-2xl transition">›</button>
 
-<div
-    id="viewModal"
-    class="hidden fixed inset-0 z-[60]
-           bg-black/95 backdrop-blur-xl
-           flex items-center justify-center">
-
-    <button
-        id="closeViewModalBtn"
-        class="absolute top-5 right-5 z-20
-               w-11 h-11 rounded-xl
-               bg-white/10 hover:bg-white/20
-               border border-white/10
-               text-white text-2xl transition">
-
-        ×
-
-    </button>
-
-
-    <button
-        id="prevBtn"
-        class="absolute left-4 sm:left-7 z-20
-               w-11 h-11 rounded-xl
-               bg-white/10 hover:bg-white/20
-               border border-white/10
-               text-white text-2xl transition">
-
-        ‹
-
-    </button>
-
-
-    <button
-        id="nextBtn"
-        class="absolute right-4 sm:right-7 z-20
-               w-11 h-11 rounded-xl
-               bg-white/10 hover:bg-white/20
-               border border-white/10
-               text-white text-2xl transition">
-
-        ›
-
-    </button>
-
-
-    <div
-        class="w-full h-full
-               flex flex-col items-center justify-center
-               px-16 sm:px-24 py-16">
-
-        <div
-            id="modalMediaContent"
-            class="max-w-full max-h-[75vh]
-                   flex items-center justify-center">
-        </div>
-
-
+    <div class="w-full h-full flex flex-col items-center justify-center px-16 sm:px-24 py-16">
+        <div id="modalMediaContent" class="max-w-full max-h-[75vh] flex items-center justify-center"></div>
         <div class="text-center mt-5 max-w-2xl">
-
-            <h2
-                id="modalTitle"
-                class="text-lg sm:text-xl font-bold text-white">
-            </h2>
-
-            <p
-                id="modalDate"
-                class="text-sm text-slate-400 mt-1">
-            </p>
-
+            <h2 id="modalTitle" class="text-lg sm:text-xl font-bold text-white"></h2>
+            <p id="modalDate" class="text-sm text-slate-400 mt-1"></p>
         </div>
-
     </div>
-
 </div>
 
-
-<!-- =========================================================
-     FIREBASE + APPLICATION JS
-========================================================= -->
 
 <script type="module">
-
-import {
-    initializeApp
-} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-
-
-import {
-    getAuth,
-    signInWithEmailAndPassword,
-    onAuthStateChanged,
-    signOut,
-    setPersistence,
-    inMemoryPersistence
-} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-
-
-import {
-    getFirestore,
-    collection,
-    addDoc,
-    onSnapshot,
-    deleteDoc,
-    doc,
-    query
-} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
-
-
-/* =========================================================
-   CLOUDINARY CONFIG
-========================================================= */
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, setPersistence, inMemoryPersistence } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc, query } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 const CLOUDINARY_CLOUD_NAME = "vneswxx4";
-
 const CLOUDINARY_UPLOAD_PRESET = "myeunji";
 
-
-
-/* =========================================================
-   FIREBASE CONFIG
-========================================================= */
-
 const firebaseConfig = {
-
-    apiKey:
-        "AIzaSyDZyW992JYkmfB9S9JskJNNyxX0wfjooBY",
-
-    authDomain:
-        "sweb-24fdc.firebaseapp.com",
-
-    projectId:
-        "sweb-24fdc",
-
-    storageBucket:
-        "sweb-24fdc.firebasestorage.app",
-
-    messagingSenderId:
-        "883021695279",
-
-    appId:
-        "1:883021695279:web:e44dc36321ee3ad40539da",
-
-    measurementId:
-        "G-B50ELELYBG"
-
+    apiKey: "AIzaSyDZyW992JYkmfB9S9JskJNNyxX0wfjooBY",
+    authDomain: "sweb-24fdc.firebaseapp.com",
+    projectId: "sweb-24fdc",
+    storageBucket: "sweb-24fdc.firebasestorage.app",
+    messagingSenderId: "883021695279",
+    appId: "1:883021695279:web:e44dc36321ee3ad40539da",
+    measurementId: "G-B50ELELYBG"
 };
 
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
+const loginPage = document.getElementById("loginPage");
+const mainApp = document.getElementById("mainApp");
+const adminLoginForm = document.getElementById("adminLoginForm");
+const logoutBtn = document.getElementById("logoutBtn");
+const openUploadModalBtn = document.getElementById("openUploadModalBtn");
+const uploadModal = document.getElementById("uploadModal");
+const closeUploadModalBtn = document.getElementById("closeUploadModalBtn");
+const uploadForm = document.getElementById("uploadForm");
+const mediaContainer = document.getElementById("mediaContainer");
+const viewModal = document.getElementById("viewModal");
+const closeViewModalBtn = document.getElementById("closeViewModalBtn");
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+const modalMediaContent = document.getElementById("modalMediaContent");
+const modalTitle = document.getElementById("modalTitle");
+const modalDate = document.getElementById("modalDate");
+const progressContainer = document.getElementById("progressContainer");
+const uploadProgress = document.getElementById("uploadProgress");
+const progressText = document.getElementById("progressText");
+const uploadSubmitBtn = document.getElementById("uploadSubmitBtn");
 
-/* =========================================================
-   INITIALIZE
-========================================================= */
-
-const app =
-    initializeApp(firebaseConfig);
-
-
-const auth =
-    getAuth(app);
-
-
-const db =
-    getFirestore(app);
-
-
-
-/* =========================================================
-   DOM
-========================================================= */
-
-const loginPage =
-    document.getElementById("loginPage");
-
-const mainApp =
-    document.getElementById("mainApp");
-
-const adminLoginForm =
-    document.getElementById("adminLoginForm");
-
-const logoutBtn =
-    document.getElementById("logoutBtn");
-
-const openUploadModalBtn =
-    document.getElementById("openUploadModalBtn");
-
-const uploadModal =
-    document.getElementById("uploadModal");
-
-const closeUploadModalBtn =
-    document.getElementById("closeUploadModalBtn");
-
-const uploadForm =
-    document.getElementById("uploadForm");
-
-const mediaContainer =
-    document.getElementById("mediaContainer");
-
-const viewModal =
-    document.getElementById("viewModal");
-
-const closeViewModalBtn =
-    document.getElementById("closeViewModalBtn");
-
-const prevBtn =
-    document.getElementById("prevBtn");
-
-const nextBtn =
-    document.getElementById("nextBtn");
-
-const modalMediaContent =
-    document.getElementById("modalMediaContent");
-
-const modalTitle =
-    document.getElementById("modalTitle");
-
-const modalDate =
-    document.getElementById("modalDate");
-
-const progressContainer =
-    document.getElementById("progressContainer");
-
-const uploadProgress =
-    document.getElementById("uploadProgress");
-
-const progressText =
-    document.getElementById("progressText");
-
-const uploadSubmitBtn =
-    document.getElementById("uploadSubmitBtn");
-
-
-
-/* =========================================================
-   STATE
-========================================================= */
+const youtubeSearchInput = document.getElementById("youtubeSearchInput");
+const youtubeSearchBtn = document.getElementById("youtubeSearchBtn");
+const youtubeResults = document.getElementById("youtubeResults");
+const youtubeStatus = document.getElementById("youtubeStatus");
 
 let memories = [];
-
 let currentViewIndex = 0;
 
+await setPersistence(auth, inMemoryPersistence);
 
-
-/* =========================================================
-   AUTH PERSISTENCE
-========================================================= */
-
-await setPersistence(
-    auth,
-    inMemoryPersistence
-);
-
-
-
-/* =========================================================
-   AUTH STATE
-========================================================= */
-
-onAuthStateChanged(
-    auth,
-    (user) => {
-
-        if (user) {
-
-            loginPage.classList.add(
-                "hidden"
-            );
-
-            mainApp.classList.remove(
-                "hidden"
-            );
-
-            loadMemories();
-
-        } else {
-
-            loginPage.classList.remove(
-                "hidden"
-            );
-
-            mainApp.classList.add(
-                "hidden"
-            );
-
-        }
-
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        loginPage.classList.add("hidden");
+        mainApp.classList.remove("hidden");
+        loadMemories();
+    } else {
+        loginPage.classList.remove("hidden");
+        mainApp.classList.add("hidden");
     }
-);
+});
 
+adminLoginForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+    const button = adminLoginForm.querySelector("button[type='submit']");
 
-
-/* =========================================================
-   LOGIN
-========================================================= */
-
-adminLoginForm.addEventListener(
-    "submit",
-    async (event) => {
-
-        event.preventDefault();
-
-
-        const email =
-            document
-                .getElementById("email")
-                .value
-                .trim();
-
-
-        const password =
-            document
-                .getElementById("password")
-                .value;
-
-
-        const button =
-            adminLoginForm.querySelector(
-                "button[type='submit']"
-            );
-
-
-        try {
-
-            button.disabled = true;
-
-            button.textContent =
-                "Signing In...";
-
-
-            await signInWithEmailAndPassword(
-                auth,
-                email,
-                password
-            );
-
-
-        } catch (error) {
-
-            console.error(error);
-
-            alert(
-                "Login failed. Please check your email and password."
-            );
-
-
-        } finally {
-
-            button.disabled = false;
-
-            button.textContent =
-                "Sign In";
-
-        }
-
+    try {
+        button.disabled = true;
+        button.textContent = "Signing In...";
+        await signInWithEmailAndPassword(auth, email, password);
+    } catch (error) {
+        console.error(error);
+        alert("Login failed. Please check your email and password.");
+    } finally {
+        button.disabled = false;
+        button.textContent = "Sign In";
     }
-);
+});
 
-
-
-/* =========================================================
-   LOGOUT
-========================================================= */
-
-logoutBtn.addEventListener(
-    "click",
-    async () => {
-
-        try {
-
-            await signOut(auth);
-
-        } catch (error) {
-
-            console.error(error);
-
-        }
-
+logoutBtn.addEventListener("click", async () => {
+    try {
+        await signOut(auth);
+    } catch (error) {
+        console.error(error);
     }
-);
-
-
-
-/* =========================================================
-   LOAD MEMORIES
-========================================================= */
+});
 
 function loadMemories() {
+    const memoriesRef = collection(db, "couple_memories");
+    const q = query(memoriesRef);
 
-    const memoriesRef =
-        collection(
-            db,
-            "couple_memories"
-        );
-
-
-    const q =
-        query(memoriesRef);
-
-
-    onSnapshot(
-        q,
-        (snapshot) => {
-
-            memories =
-                snapshot.docs.map(
-                    (item) => ({
-                        id: item.id,
-                        ...item.data()
-                    })
-                );
-
-
-            renderGallery();
-
-        },
-        (error) => {
-
-            console.error(
-                "Error loading memories:",
-                error
-            );
-
-        }
-    );
-
+    onSnapshot(q, (snapshot) => {
+        memories = snapshot.docs.map((item) => ({
+            id: item.id,
+            ...item.data()
+        }));
+        renderGallery();
+    }, (error) => {
+        console.error("Error loading memories:", error);
+    });
 }
-
-
-
-/* =========================================================
-   RENDER GALLERY
-========================================================= */
 
 function renderGallery() {
-
     mediaContainer.innerHTML = "";
 
-
     if (memories.length === 0) {
-
         mediaContainer.innerHTML = `
-
-            <div
-                class="empty-state
-                       col-span-full
-                       rounded-3xl
-                       p-12
-                       text-center">
-
-                <div class="text-5xl mb-4">
-                    💗
-                </div>
-
-                <h3 class="text-xl font-bold text-white">
-                    No Memories Yet
-                </h3>
-
-                <p class="text-slate-500 mt-2">
-                    Upload your first memory to get started.
-                </p>
-
+            <div class="empty-state col-span-full rounded-3xl p-12 text-center">
+                <div class="text-5xl mb-4">💗</div>
+                <h3 class="text-xl font-bold text-white">No Memories Yet</h3>
+                <p class="text-slate-500 mt-2">Upload your first memory to get started.</p>
             </div>
-
         `;
-
         return;
     }
 
+    memories.forEach((memory, index) => {
+        const card = document.createElement("div");
+        card.className = "memory-card group cursor-pointer";
 
-    memories.forEach(
-        (memory, index) => {
+        const mediaWrapper = document.createElement("div");
+        mediaWrapper.className = "relative aspect-[4/3] overflow-hidden bg-slate-900";
 
-            const card =
-                document.createElement(
-                    "div"
-                );
+        let mediaElement;
+        if (memory.type === "video") {
+            mediaElement = document.createElement("video");
+            mediaElement.controls = false;
+            mediaElement.muted = true;
+            mediaElement.playsInline = true;
+            mediaElement.className = "memory-media w-full h-full object-cover";
+            mediaElement.src = memory.url;
+        } else {
+            mediaElement = document.createElement("img");
+            mediaElement.loading = "lazy";
+            mediaElement.className = "memory-media w-full h-full object-cover";
+            mediaElement.src = memory.url;
+            mediaElement.alt = memory.title || "Memory";
+        }
 
+        mediaWrapper.appendChild(mediaElement);
 
-            card.className =
-                "memory-card group cursor-pointer";
+        const overlay = document.createElement("div");
+        overlay.className = "absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent opacity-70";
+        mediaWrapper.appendChild(overlay);
+        card.appendChild(mediaWrapper);
 
+        const content = document.createElement("div");
+        content.className = "p-4";
 
-            const mediaWrapper =
-                document.createElement(
-                    "div"
-                );
+        const title = document.createElement("h3");
+        title.className = "font-bold text-white truncate";
+        title.textContent = memory.title || "Untitled Memory";
 
+        const meta = document.createElement("div");
+        meta.className = "flex items-center justify-between gap-3 mt-2";
 
-            mediaWrapper.className =
-                "relative aspect-[4/3] overflow-hidden bg-slate-900";
+        const date = document.createElement("p");
+        date.className = "text-xs text-slate-500";
+        date.textContent = memory.date || "";
 
+        const type = document.createElement("span");
+        type.className = "text-[10px] uppercase tracking-wider font-bold px-2 py-1 rounded-md bg-rose-500/10 text-rose-400 border border-rose-500/10";
+        type.textContent = memory.type || "image";
 
-            let mediaElement;
+        meta.appendChild(date);
+        meta.appendChild(type);
+        content.appendChild(title);
+        content.appendChild(meta);
 
+        const deleteButton = document.createElement("button");
+        deleteButton.className = "mt-4 w-full py-2 rounded-xl text-sm font-semibold bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/10 transition";
+        deleteButton.textContent = "Delete";
 
-            if (
-                memory.type ===
-                "video"
-            ) {
+        deleteButton.addEventListener("click", async (event) => {
+            event.stopPropagation();
+            const confirmed = confirm("Are you sure you want to delete this memory?");
+            if (!confirmed) return;
 
-                mediaElement =
-                    document.createElement(
-                        "video"
-                    );
-
-
-                mediaElement.controls =
-                    false;
-
-                mediaElement.muted =
-                    true;
-
-                mediaElement.playsInline =
-                    true;
-
-
-                mediaElement.className =
-                    "memory-media w-full h-full object-cover";
-
-
-                mediaElement.src =
-                    memory.url;
-
-            } else {
-
-                mediaElement =
-                    document.createElement(
-                        "img"
-                    );
-
-
-                mediaElement.loading =
-                    "lazy";
-
-
-                mediaElement.className =
-                    "memory-media w-full h-full object-cover";
-
-
-                mediaElement.src =
-                    memory.url;
-
-
-                mediaElement.alt =
-                    memory.title ||
-                    "Memory";
-
+            try {
+                await deleteDoc(doc(db, "couple_memories", memory.id));
+            } catch (error) {
+                console.error(error);
+                alert("Failed to delete this memory.");
             }
+        });
 
+        content.appendChild(deleteButton);
+        card.appendChild(content);
 
-            mediaWrapper.appendChild(
-                mediaElement
-            );
+        card.addEventListener("click", () => {
+            openViewer(index);
+        });
 
-
-            const overlay =
-                document.createElement(
-                    "div"
-                );
-
-
-            overlay.className =
-                "absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent opacity-70";
-
-
-            mediaWrapper.appendChild(
-                overlay
-            );
-
-
-            card.appendChild(
-                mediaWrapper
-            );
-
-
-            const content =
-                document.createElement(
-                    "div"
-                );
-
-
-            content.className =
-                "p-4";
-
-
-            const title =
-                document.createElement(
-                    "h3"
-                );
-
-
-            title.className =
-                "font-bold text-white truncate";
-
-
-            title.textContent =
-                memory.title ||
-                "Untitled Memory";
-
-
-            const meta =
-                document.createElement(
-                    "div"
-                );
-
-
-            meta.className =
-                "flex items-center justify-between gap-3 mt-2";
-
-
-            const date =
-                document.createElement(
-                    "p"
-                );
-
-
-            date.className =
-                "text-xs text-slate-500";
-
-
-            date.textContent =
-                memory.date ||
-                "";
-
-
-            const type =
-                document.createElement(
-                    "span"
-                );
-
-
-            type.className =
-                "text-[10px] uppercase tracking-wider font-bold px-2 py-1 rounded-md bg-rose-500/10 text-rose-400 border border-rose-500/10";
-
-
-            type.textContent =
-                memory.type ||
-                "image";
-
-
-            meta.appendChild(
-                date
-            );
-
-
-            meta.appendChild(
-                type
-            );
-
-
-            content.appendChild(
-                title
-            );
-
-
-            content.appendChild(
-                meta
-            );
-
-
-            const deleteButton =
-                document.createElement(
-                    "button"
-                );
-
-
-            deleteButton.className =
-                "mt-4 w-full py-2 rounded-xl text-sm font-semibold bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/10 transition";
-
-
-            deleteButton.textContent =
-                "Delete";
-
-
-            deleteButton.addEventListener(
-                "click",
-                async (event) => {
-
-                    event.stopPropagation();
-
-
-                    const confirmed =
-                        confirm(
-                            "Are you sure you want to delete this memory?"
-                        );
-
-
-                    if (!confirmed) {
-                        return;
-                    }
-
-
-                    try {
-
-                        await deleteDoc(
-                            doc(
-                                db,
-                                "couple_memories",
-                                memory.id
-                            )
-                        );
-
-
-                    } catch (error) {
-
-                        console.error(
-                            error
-                        );
-
-
-                        alert(
-                            "Failed to delete this memory."
-                        );
-
-                    }
-
-                }
-            );
-
-
-            content.appendChild(
-                deleteButton
-            );
-
-
-            card.appendChild(
-                content
-            );
-
-
-            card.addEventListener(
-                "click",
-                () => {
-
-                    openViewer(
-                        index
-                    );
-
-                }
-            );
-
-
-            mediaContainer.appendChild(
-                card
-            );
-
-        }
-    );
-
+        mediaContainer.appendChild(card);
+    });
 }
 
+openUploadModalBtn.addEventListener("click", () => {
+    uploadModal.classList.remove("hidden");
+});
 
+closeUploadModalBtn.addEventListener("click", () => {
+    uploadModal.classList.add("hidden");
+});
 
-/* =========================================================
-   OPEN UPLOAD MODAL
-========================================================= */
-
-openUploadModalBtn.addEventListener(
-    "click",
-    () => {
-
-        uploadModal.classList.remove(
-            "hidden"
-        );
-
+uploadModal.addEventListener("click", (event) => {
+    if (event.target === uploadModal) {
+        uploadModal.classList.add("hidden");
     }
-);
+});
 
+function uploadToCloudinary(file, onProgress) {
+    return new Promise((resolve, reject) => {
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
 
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/auto/upload`);
 
-/* =========================================================
-   CLOSE UPLOAD MODAL
-========================================================= */
+        xhr.upload.addEventListener("progress", (event) => {
+            if (event.lengthComputable) {
+                const percent = Math.round((event.loaded / event.total) * 100);
+                onProgress(percent);
+            }
+        });
 
-closeUploadModalBtn.addEventListener(
-    "click",
-    () => {
-
-        uploadModal.classList.add(
-            "hidden"
-        );
-
-    }
-);
-
-
-uploadModal.addEventListener(
-    "click",
-    (event) => {
-
-        if (
-            event.target ===
-            uploadModal
-        ) {
-
-            uploadModal.classList.add(
-                "hidden"
-            );
-
-        }
-
-    }
-);
-
-
-
-/* =========================================================
-   CLOUDINARY UPLOAD
-========================================================= */
-
-function uploadToCloudinary(
-    file,
-    onProgress
-) {
-
-    return new Promise(
-        (resolve, reject) => {
-
-            const formData =
-                new FormData();
-
-
-            formData.append(
-                "file",
-                file
-            );
-
-
-            formData.append(
-                "upload_preset",
-                CLOUDINARY_UPLOAD_PRESET
-            );
-
-
-            const xhr =
-                new XMLHttpRequest();
-
-
-            xhr.open(
-                "POST",
-                `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/auto/upload`
-            );
-
-
-            xhr.upload.addEventListener(
-                "progress",
-                (event) => {
-
-                    if (
-                        event.lengthComputable
-                    ) {
-
-                        const percent =
-                            Math.round(
-                                (
-                                    event.loaded /
-                                    event.total
-                                ) * 100
-                            );
-
-
-                        onProgress(
-                            percent
-                        );
-
-                    }
-
+        xhr.onload = () => {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                try {
+                    const response = JSON.parse(xhr.responseText);
+                    resolve(response);
+                } catch (error) {
+                    reject(error);
                 }
-            );
+            } else {
+                reject(new Error("Cloudinary upload failed."));
+            }
+        };
 
+        xhr.onerror = () => {
+            reject(new Error("Network error during upload."));
+        };
 
-            xhr.onload =
-                () => {
-
-                    if (
-                        xhr.status >= 200 &&
-                        xhr.status < 300
-                    ) {
-
-                        try {
-
-                            const response =
-                                JSON.parse(
-                                    xhr.responseText
-                                );
-
-
-                            resolve(
-                                response
-                            );
-
-
-                        } catch (error) {
-
-                            reject(
-                                error
-                            );
-
-                        }
-
-                    } else {
-
-                        reject(
-                            new Error(
-                                "Cloudinary upload failed."
-                            )
-                        );
-
-                    }
-
-                };
-
-
-            xhr.onerror =
-                () => {
-
-                    reject(
-                        new Error(
-                            "Network error during upload."
-                        )
-                    );
-
-                };
-
-
-            xhr.send(
-                formData
-            );
-
-        }
-    );
-
+        xhr.send(formData);
+    });
 }
 
-
-
-/* =========================================================
-   UPLOAD FORM
-========================================================= */
-
-uploadForm.addEventListener(
-    "submit",
-    async (event) => {
-
-        event.preventDefault();
-
-
-        const title =
-            document
-                .getElementById("mediaTitle")
-                .value
-                .trim();
-
-
-        const type =
-            document
-                .getElementById("mediaType")
-                .value;
-
-
-        /*
-            DATE IS OPTIONAL.
-            If the user does not select a date,
-            this will simply be an empty string.
-        */
-
-        const date =
-            document
-                .getElementById("mediaDate")
-                .value;
-
-
-        const fileInput =
-            document.getElementById(
-                "mediaFile"
-            );
-
-
-        const file =
-            fileInput.files[0];
-
-
-        if (!file) {
-
-            alert(
-                "Please select a file."
-            );
-
-            return;
-        }
-
-
-        try {
-
-            uploadSubmitBtn.disabled =
-                true;
-
-
-            uploadSubmitBtn.textContent =
-                "Uploading...";
-
-
-            progressContainer.classList.remove(
-                "hidden"
-            );
-
-
-            uploadProgress.style.width =
-                "0%";
-
-
-            progressText.textContent =
-                "0%";
-
-
-            const result =
-                await uploadToCloudinary(
-                    file,
-                    (percent) => {
-
-                        uploadProgress.style.width =
-                            `${percent}%`;
-
-
-                        progressText.textContent =
-                            `${percent}%`;
-
-                    }
-                );
-
-
-            await addDoc(
-                collection(
-                    db,
-                    "couple_memories"
-                ),
-                {
-                    title: title,
-                    type: type,
-
-                    /*
-                        Empty string if no date
-                        was selected.
-                    */
-
-                    date: date,
-
-                    url:
-                        result.secure_url,
-
-                    public_id:
-                        result.public_id,
-
-                    createdAt:
-                        Date.now()
-                }
-            );
-
-
-            uploadForm.reset();
-
-
-            uploadProgress.style.width =
-                "100%";
-
-
-            progressText.textContent =
-                "100%";
-
-
-            setTimeout(
-                () => {
-
-                    progressContainer.classList.add(
-                        "hidden"
-                    );
-
-
-                    uploadModal.classList.add(
-                        "hidden"
-                    );
-
-                },
-                500
-            );
-
-
-        } catch (error) {
-
-            console.error(
-                error
-            );
-
-
-            alert(
-                "Upload failed. Please try again."
-            );
-
-
-        } finally {
-
-            uploadSubmitBtn.disabled =
-                false;
-
-
-            uploadSubmitBtn.textContent =
-                "Upload Memory";
-
-        }
-
+uploadForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const title = document.getElementById("mediaTitle").value.trim();
+    const type = document.getElementById("mediaType").value;
+    const date = document.getElementById("mediaDate").value;
+    const fileInput = document.getElementById("mediaFile");
+    const file = fileInput.files[0];
+
+    if (!file) {
+        alert("Please select a file.");
+        return;
     }
-);
 
+    try {
+        uploadSubmitBtn.disabled = true;
+        uploadSubmitBtn.textContent = "Uploading...";
+        progressContainer.classList.remove("hidden");
+        uploadProgress.style.width = "0%";
+        progressText.textContent = "0%";
 
+        const result = await uploadToCloudinary(file, (percent) => {
+            uploadProgress.style.width = `${percent}%`;
+            progressText.textContent = `${percent}%`;
+        });
 
-/* =========================================================
-   VIEWER
-========================================================= */
+        await addDoc(collection(db, "couple_memories"), {
+            title: title,
+            type: type,
+            date: date,
+            url: result.secure_url,
+            public_id: result.public_id,
+            createdAt: Date.now()
+        });
+
+        uploadForm.reset();
+        uploadProgress.style.width = "100%";
+        progressText.textContent = "100%";
+
+        setTimeout(() => {
+            progressContainer.classList.add("hidden");
+            uploadModal.classList.add("hidden");
+        }, 500);
+
+    } catch (error) {
+        console.error(error);
+        alert("Upload failed. Please try again.");
+    } finally {
+        uploadSubmitBtn.disabled = false;
+        uploadSubmitBtn.textContent = "Upload Memory";
+    }
+});
 
 function openViewer(index) {
-
-    if (
-        index < 0 ||
-        index >= memories.length
-    ) {
-        return;
-    }
-
-
-    currentViewIndex =
-        index;
-
-
+    if (index < 0 || index >= memories.length) return;
+    currentViewIndex = index;
     renderViewer();
-
-
-    viewModal.classList.remove(
-        "hidden"
-    );
-
+    viewModal.classList.remove("hidden");
 }
-
-
 
 function renderViewer() {
+    const memory = memories[currentViewIndex];
+    if (!memory) return;
 
-    const memory =
-        memories[
-            currentViewIndex
-        ];
+    modalMediaContent.innerHTML = "";
+    let media;
 
+    if (memory.type === "video") {
+        media = document.createElement("video");
+        media.controls = true;
+        media.autoplay = true;
+        media.playsInline = true;
+        media.className = "max-w-full max-h-[75vh] rounded-2xl shadow-2xl";
+    } else {
+        media = document.createElement("img");
+        media.className = "max-w-full max-h-[75vh] object-contain rounded-2xl shadow-2xl";
+        media.alt = memory.title || "Memory";
+    }
 
-    if (!memory) {
+    media.src = memory.url;
+    modalMediaContent.appendChild(media);
+    modalTitle.textContent = memory.title || "Untitled Memory";
+    modalDate.textContent = memory.date || "";
+}
+
+nextBtn.addEventListener("click", (event) => {
+    event.stopPropagation();
+    if (memories.length === 0) return;
+    currentViewIndex = (currentViewIndex + 1) % memories.length;
+    renderViewer();
+});
+
+prevBtn.addEventListener("click", (event) => {
+    event.stopPropagation();
+    if (memories.length === 0) return;
+    currentViewIndex = (currentViewIndex - 1 + memories.length) % memories.length;
+    renderViewer();
+});
+
+function closeMemoryViewer() {
+    viewModal.classList.add("hidden");
+    modalMediaContent.innerHTML = "";
+}
+
+closeViewModalBtn.addEventListener("click", closeMemoryViewer);
+
+viewModal.addEventListener("click", (event) => {
+    if (event.target === viewModal) {
+        closeMemoryViewer();
+    }
+});
+
+function showYoutubeStatus(message, type = "normal") {
+    youtubeStatus.classList.remove("hidden");
+    let className = "mt-5 rounded-xl p-4 text-sm ";
+
+    if (type === "error") {
+        className += "youtube-error text-red-300";
+    } else {
+        className += "bg-white/5 border border-white/5 text-slate-400";
+    }
+
+    youtubeStatus.className = className;
+    youtubeStatus.innerHTML = message;
+}
+
+function hideYoutubeStatus() {
+    youtubeStatus.classList.add("hidden");
+}
+
+function escapeHtml(value) {
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+function extractYoutubeId(input) {
+    const text = input.trim();
+    if (!text) return null;
+
+    if (/^[a-zA-Z0-9_-]{11}$/.test(text)) {
+        return text;
+    }
+
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|shorts\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    const match = text.match(regExp);
+
+    return (match && match[2].length === 11) ? match[2] : null;
+}
+
+function processYoutubeInput() {
+    const inputValue = youtubeSearchInput.value.trim();
+
+    if (!inputValue) {
+        showYoutubeStatus("Please paste a YouTube Link or Video ID.", "error");
+        youtubeResults.innerHTML = "";
         return;
     }
 
+    const videoId = extractYoutubeId(inputValue);
 
-    modalMediaContent.innerHTML =
-        "";
-
-
-    let media;
-
-
-    if (
-        memory.type ===
-        "video"
-    ) {
-
-        media =
-            document.createElement(
-                "video"
-            );
-
-
-        media.controls =
-            true;
-
-        media.autoplay =
-            true;
-
-        media.playsInline =
-            true;
-
-
-        media.className =
-            "max-w-full max-h-[75vh] rounded-2xl shadow-2xl";
-
-
-    } else {
-
-        media =
-            document.createElement(
-                "img"
-            );
-
-
-        media.className =
-            "max-w-full max-h-[75vh] object-contain rounded-2xl shadow-2xl";
-
-
-        media.alt =
-            memory.title ||
-            "Memory";
-
+    if (!videoId) {
+        showYoutubeStatus(`
+            <div class="font-bold text-red-200 mb-1">Invalid YouTube Link</div>
+            <div class="text-red-300/80">Please paste a valid YouTube video URL or ID.</div>
+        `, "error");
+        youtubeResults.innerHTML = "";
+        return;
     }
 
-
-    media.src =
-        memory.url;
-
-
-    modalMediaContent.appendChild(
-        media
-    );
-
-
-    modalTitle.textContent =
-        memory.title ||
-        "Untitled Memory";
-
-
-    /*
-        If date is empty,
-        nothing will be shown.
-    */
-
-    modalDate.textContent =
-        memory.date ||
-        "";
-
+    hideYoutubeStatus();
+    renderYoutubeCard(videoId);
 }
 
+function renderYoutubeCard(videoId) {
+    youtubeResults.innerHTML = "";
 
+    const card = document.createElement("div");
+    card.className = "w-full rounded-2xl overflow-hidden border border-white/10 bg-slate-900/80 shadow-2xl";
+    card.innerHTML = `
+        <div class="relative w-full aspect-video">
+            <iframe 
+                class="w-full h-full border-0" 
+                src="https://www.youtube.com/embed/${encodeURIComponent(videoId)}?autoplay=1&rel=0" 
+                title="YouTube video player" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen>
+            </iframe>
+        </div>
+        <div class="p-4 flex items-center justify-between bg-black/40">
+            <div>
+                <h3 class="text-white font-bold text-sm sm:text-base">YouTube Video</h3>
+                <p class="text-xs text-rose-400 mt-0.5">ID: ${escapeHtml(videoId)}</p>
+            </div>
+            <button id="closeInPageVideoBtn" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-rose-500/20 text-rose-300 hover:bg-rose-500/30 border border-rose-500/20 transition">
+                Close Player
+            </button>
+        </div>
+    `;
 
-/* =========================================================
-   NEXT
-========================================================= */
+    youtubeResults.appendChild(card);
 
-nextBtn.addEventListener(
-    "click",
-    (event) => {
+    document.getElementById("closeInPageVideoBtn").addEventListener("click", () => {
+        youtubeResults.innerHTML = "";
+    });
+}
 
-        event.stopPropagation();
+youtubeSearchBtn.addEventListener("click", processYoutubeInput);
 
-
-        if (
-            memories.length === 0
-        ) {
-            return;
-        }
-
-
-        currentViewIndex =
-            (
-                currentViewIndex + 1
-            ) %
-            memories.length;
-
-
-        renderViewer();
-
+youtubeSearchInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        processYoutubeInput();
     }
-);
+});
 
+document.addEventListener("keydown", (event) => {
+    if (viewModal.classList.contains("hidden")) return;
 
-
-/* =========================================================
-   PREVIOUS
-========================================================= */
-
-prevBtn.addEventListener(
-    "click",
-    (event) => {
-
-        event.stopPropagation();
-
-
-        if (
-            memories.length === 0
-        ) {
-            return;
-        }
-
-
-        currentViewIndex =
-            (
-                currentViewIndex - 1 +
-                memories.length
-            ) %
-            memories.length;
-
-
-        renderViewer();
-
+    if (event.key === "Escape") {
+        closeMemoryViewer();
     }
-);
-
-
-
-/* =========================================================
-   CLOSE VIEWER
-========================================================= */
-
-closeViewModalBtn.addEventListener(
-    "click",
-    () => {
-
-        viewModal.classList.add(
-            "hidden"
-        );
-
-
-        modalMediaContent.innerHTML =
-            "";
-
+    if (event.key === "ArrowRight") {
+        nextBtn.click();
     }
-);
-
-
-viewModal.addEventListener(
-    "click",
-    (event) => {
-
-        if (
-            event.target ===
-            viewModal
-        ) {
-
-            viewModal.classList.add(
-                "hidden"
-            );
-
-
-            modalMediaContent.innerHTML =
-                "";
-
-        }
-
+    if (event.key === "ArrowLeft") {
+        prevBtn.click();
     }
-);
-
-
-
-/* =========================================================
-   KEYBOARD CONTROLS
-========================================================= */
-
-document.addEventListener(
-    "keydown",
-    (event) => {
-
-        if (
-            viewModal.classList.contains(
-                "hidden"
-            )
-        ) {
-            return;
-        }
-
-
-        if (
-            event.key ===
-            "Escape"
-        ) {
-
-            viewModal.classList.add(
-                "hidden"
-            );
-
-
-            modalMediaContent.innerHTML =
-                "";
-
-        }
-
-
-        if (
-            event.key ===
-            "ArrowRight"
-        ) {
-
-            nextBtn.click();
-
-        }
-
-
-        if (
-            event.key ===
-            "ArrowLeft"
-        ) {
-
-            prevBtn.click();
-
-        }
-
-    }
-);
-
-
-
-/* =========================================================
-   INITIAL AUTH RESET
-========================================================= */
+});
 
 try {
-
-    await signOut(
-        auth
-    );
-
+    await signOut(auth);
 } catch (error) {
-
-    console.error(
-        error
-    );
-
+    console.error(error);
 }
-
 </script>
 
 </body>
